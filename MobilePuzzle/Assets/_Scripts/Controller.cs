@@ -18,7 +18,21 @@ public class Controller : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider.CompareTag("Tile"))
+                {
+                    string[] coords = hit.collider.name.Split(',');
+                    int xCoord = int.Parse(coords[0]);
+                    int yCoord = int.Parse(coords[1]);
+                    print(xCoord + "," + yCoord);
+                }
+            }
+        }
     }
 
     public void Move(Vector3 direction){
