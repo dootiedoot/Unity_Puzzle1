@@ -40,24 +40,50 @@ public class MapGenerator : MonoBehaviour
                 newTile.localScale = Vector3.one * (1 - outlinePercent);
                 //newTile.parent = mapHolder;
                 newTile.parent = transform;
-                newTile.name = x.ToString() + "," + y.ToString();
 
                 tiles[totalTiles] = newTile.gameObject;
                 totalTiles++;
             }
         }
-
-        foreach (GameObject tile in tiles)
-        {
-            tile.GetComponent<Tile>().Tiles = tiles;
-            tile.GetComponent<Tile>().AssignAdjacentTiles();
-        }
-
     }
 
     void Start()
     {
-        
+       AssignAdjacentTiles();
+    }
+
+    public void AssignAdjacentTiles()
+    {
+        foreach (GameObject tile in tiles)
+        {
+            Tile _tile = tile.GetComponent<Tile>();
+            Vector2 top     = new Vector2(_tile.TileCoord.x, _tile.TileCoord.y + 1);
+            Vector2 right   = new Vector2(_tile.TileCoord.x + 1, _tile.TileCoord.y);
+            Vector2 bottom  = new Vector2(_tile.TileCoord.x, _tile.TileCoord.y - 1);
+            Vector2 left    = new Vector2(_tile.TileCoord.x - 1, _tile.TileCoord.y);
+
+            //print( _tile.name + top + " " + right + " " + bottom + " " +left);
+            foreach (GameObject localTile in tiles)
+            {
+                //print(localTile.name);
+                Tile _localTile = localTile.GetComponent<Tile>();
+                
+                if (_localTile.TileCoord == top)
+                    _tile.TopTile = localTile;
+                else if (_localTile.TileCoord == right)
+                    _tile.RightTile = localTile;
+                else if (_localTile.TileCoord == bottom)
+                    _tile.BottomTile = localTile;
+                else if (_localTile.TileCoord == left)
+                    _tile.LeftTile = localTile;
+            }
+        }
+    }
+
+    public void ClearMaterials()
+    {
+        foreach (GameObject tile in tiles)
+            tile.GetComponent<Tile>().SwapMaterial(0);
     }
 
     // Accessors and Mutators

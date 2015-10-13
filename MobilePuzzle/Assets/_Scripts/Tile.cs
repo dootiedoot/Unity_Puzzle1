@@ -9,35 +9,42 @@ public class Tile : MonoBehaviour
     int yCoord;
 
     [SerializeField] private GameObject currentTileEnitity;
-    [SerializeField] private GameObject UpTile;
-    [SerializeField] private GameObject RightTile;
-    [SerializeField] private GameObject DownTile;
-    [SerializeField] private GameObject LeftTile;
+    [SerializeField] private GameObject topTile;
+    [SerializeField] private GameObject rightTile;
+    [SerializeField] private GameObject bottomTile;
+    [SerializeField] private GameObject leftTile;
 
-    private GameObject[] tiles;
+    // visuals
+    public Material defaultMat;
+    public Material highlightMat;
 
     // Use this for initialization
-    void Start ()
+    void Awake ()
     {
-        string[] coords = name.Split(',');
-        xCoord = int.Parse(coords[0]);
-        yCoord = int.Parse(coords[1]);
-        tileCoord = new Vector2(xCoord, yCoord);
-        
+        //string[] coords = name.Split(',');
+        //xCoord = int.Parse(coords[0]);
+        //yCoord = int.Parse(coords[1]);
+        //tileCoord = new Vector2(xCoord, yCoord);
+
+        tileCoord = new Vector2(transform.position.x, transform.position.z);
+        transform.name = tileCoord.x.ToString() + "," + tileCoord.y.ToString();
+
     }
 
-    public void AssignAdjacentTiles()
+    public void SwapMaterial(int targetMat)
     {
-        foreach (GameObject tile in tiles)
+        Renderer rend = GetComponent<Renderer>();
+        switch (targetMat)
         {
-            if  (tile.GetComponent<Tile>().TileCoord == new Vector2(tileCoord.x, tileCoord.y + 1))
-                UpTile = tile;
-            /*else if (tile.GetComponent<Tile>().TileCoord == new Vector2(tileCoord.x + 1, tileCoord.y))
-                RightTile = tile;
-            else if (tile.GetComponent<Tile>().TileCoord == new Vector2(tileCoord.x, tileCoord.y - 1))
-                DownTile = tile;
-            else if (tile.GetComponent<Tile>().TileCoord == new Vector2(tileCoord.x - 1, tileCoord.y))
-                LeftTile = tile;*/
+            case 0:
+                rend.material = defaultMat;
+                break;
+            case 1:
+                rend.material = highlightMat;
+                break;
+            default:
+                Debug.Log("wut");
+                break;
         }
     }
 
@@ -52,10 +59,24 @@ public class Tile : MonoBehaviour
         get { return currentTileEnitity; }
         set { currentTileEnitity = value; }
     }
-
-    public GameObject[] Tiles
+    public GameObject TopTile
     {
-        get { return tiles; }
-        set { tiles = value; }
+        get { return topTile; }
+        set { topTile = value; }
+    }
+    public GameObject RightTile
+    {
+        get { return rightTile; }
+        set { rightTile = value; }
+    }
+    public GameObject BottomTile
+    {
+        get { return bottomTile; }
+        set { bottomTile = value; }
+    }
+    public GameObject LeftTile
+    {
+        get { return leftTile; }
+        set { leftTile = value; }
     }
 }
