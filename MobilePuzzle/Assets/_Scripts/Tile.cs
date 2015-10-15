@@ -21,16 +21,18 @@ public class Tile : MonoBehaviour
     // Use this for initialization
     void Awake ()
     {
-        //string[] coords = name.Split(',');
-        //xCoord = int.Parse(coords[0]);
-        //yCoord = int.Parse(coords[1]);
-        //tileCoord = new Vector2(xCoord, yCoord);
-
         tileCoord = new Vector2(transform.position.x, transform.position.z);
         transform.name = tileCoord.x.ToString() + "," + tileCoord.y.ToString();
 
     }
 
+    public void EntityAction(Vector3 direction)
+    {
+        if(currentTileEnitity != null)
+            currentTileEnitity.GetComponent<Pawn>().Move(direction);
+    }
+
+    // Visually swap the material of the tile
     public void SwapMaterial(int targetMat)
     {
         Renderer rend = GetComponent<Renderer>();
