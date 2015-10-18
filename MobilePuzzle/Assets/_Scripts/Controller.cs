@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Controller : MonoBehaviour
 {
-
+    private bool hasSelected = false;
     private MapGenerator _map;
 
     void Awake()
@@ -26,16 +26,27 @@ public class Controller : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.collider.CompareTag("Tile"))
+                // if the hit object is a tile and doesn't have a entity on it
+                if (hit.collider.CompareTag("Tile") && !hit.collider.GetComponent<Tile>().CurrentTileEnitity)
                 {
-                    GameObject[] adjacentTiles = SelectTile(hit.collider.GetComponent<Tile>());
-                    EntityAction(adjacentTiles);
+                    ClearSelections();
+                    GameObject[] adjacentTiles = getAdjacentTiles(hit.collider.GetComponent<Tile>());
+                    if (!hasSelected)
+                    {
+                        showTileSelected(adjacentTiles);
+                        hasSelected = true;
+                    }
+                    else
+                    {
+                        doEntityAction(adjacentTiles);
+                        hasSelected = false;
+                    }
                 }
             }
         }
     }
 
-    public GameObject[] SelectTile(Tile tile)
+    public GameObject[] getAdjacentTiles(Tile tile)
     {
         GameObject[] adjacentTiles = new GameObject[4];
         adjacentTiles[0] = tile.TopTile;
@@ -45,16 +56,34 @@ public class Controller : MonoBehaviour
         return adjacentTiles;
     }
 
-    public void EntityAction(GameObject[] adjacentTiles)
+    void ClearSelections()
     {
-        //Visual
-        _map.ClearMaterials();
+        foreach (GameObject tile in _map.Tiles)
+            tile.GetComponent<Tile>().isSelected = false;
+    }
 
+    void showTileSelected(GameObject[] adjacentTiles)
+    {
         for (int i = 0; i < 4; i++)
         {
             if (adjacentTiles[i] != null)
             {
                 Tile _tile = adjacentTiles[i].GetComponent<Tile>();
+
+                //Visual
+                _tile.FlashColor();
+            }
+        }
+    }
+
+    void doEntityAction(GameObject[] adjacentTiles)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            if (adjacentTiles[i] != null)
+            {
+                Tile _tile = adjacentTiles[i].GetComponent<Tile>();
+                _tile.isSelected = false;
 
                 if (i == 0)
                     _tile.EntityAction(Vector3.forward);
@@ -64,8 +93,6 @@ public class Controller : MonoBehaviour
                     _tile.EntityAction(Vector3.back);
                 else if (i == 3)
                     _tile.EntityAction(Vector3.left);
-                   
-                _tile.SwapMaterial(1);
             }
         }
     }

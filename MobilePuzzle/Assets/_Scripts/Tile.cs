@@ -15,39 +15,49 @@ public class Tile : MonoBehaviour
     [SerializeField] private GameObject leftTile;
 
     // visuals
+    public bool isSelected = false;
     public Material defaultMat;
-    public Material highlightMat;
+    private Color defaultColor;
+    public Color flashColor;
 
     // Use this for initialization
     void Awake ()
     {
         tileCoord = new Vector2(transform.position.x, transform.position.z);
         transform.name = tileCoord.x.ToString() + "," + tileCoord.y.ToString();
+    }
 
+    void Start()
+    {
+        defaultColor = defaultMat.color;
     }
 
     public void EntityAction(Vector3 direction)
     {
         if(currentTileEnitity != null)
-            currentTileEnitity.GetComponent<Pawn>().Move(direction);
+            currentTileEnitity.GetComponent<Entity>().Move(direction);
     }
 
-    // Visually swap the material of the tile
-    public void SwapMaterial(int targetMat)
+    public void FlashColor(){
+        isSelected = true;
+        StartCoroutine(doFlashColor());
+    }
+
+    IEnumerator doFlashColor()
     {
-        Renderer rend = GetComponent<Renderer>();
-        switch (targetMat)
+        float flashSpeed = 2;
+
+        Color defaultColor = this.defaultColor;
+        Color flashColor = this.flashColor;
+
+        while(isSelected)
         {
-            case 0:
-                rend.material = defaultMat;
-                break;
-            case 1:
-                rend.material = highlightMat;
-                break;
-            default:
-                Debug.Log("wut");
-                break;
+            Debug.Log("Flashing");
+            defaultMat.color = Color.Lerp(defaultColor, flashColor, Mathf.PingPong(2 * flashSpeed, 1));
+
+            yield return null;
         }
+        //defaultMat.color = defaultColor;
     }
 
     // Accessors and Mutators

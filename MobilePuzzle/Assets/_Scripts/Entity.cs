@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Pawn : MonoBehaviour
+public class Entity : MonoBehaviour
 {
     [SerializeField] private Vector2 currentCoords;
     [SerializeField] private GameObject currentTile;
@@ -21,6 +21,7 @@ public class Pawn : MonoBehaviour
 
     void Start()
     {
+        // Initial entity-to-tile setup
         currentCoords = new Vector2(transform.position.x, transform.position.z);
         foreach (GameObject tile in _map.Tiles)
         {
@@ -35,7 +36,7 @@ public class Pawn : MonoBehaviour
         }
     }
 
-
+    // Rescan grid to update entity-to-tile data
     void UpdatePosition()
     {
         currentCoords = new Vector2(transform.position.x, transform.position.z);
@@ -53,6 +54,7 @@ public class Pawn : MonoBehaviour
         }
     }
 
+    // public method to perform Move action
     public void Move(Vector3 direction)
     {
         if (!isMoving)

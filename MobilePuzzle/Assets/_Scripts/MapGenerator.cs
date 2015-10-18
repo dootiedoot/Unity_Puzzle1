@@ -80,12 +80,6 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    public void ClearMaterials()
-    {
-        foreach (GameObject tile in tiles)
-            tile.GetComponent<Tile>().SwapMaterial(0);
-    }
-
     // Accessors and Mutators
     public GameObject[] Tiles
     {
