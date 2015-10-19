@@ -15,21 +15,23 @@ public class Tile : MonoBehaviour
     [SerializeField] private GameObject leftTile;
 
     // visuals
+    //[HideInInspector]
     public bool isSelected = false;
-    public Material defaultMat;
-    private Color defaultColor;
+    private Material defaultMat;
+    public Color defaultColor;
     public Color flashColor;
 
     // Use this for initialization
     void Awake ()
     {
+        defaultMat = GetComponent<Renderer>().material;
         tileCoord = new Vector2(transform.position.x, transform.position.z);
         transform.name = tileCoord.x.ToString() + "," + tileCoord.y.ToString();
     }
 
     void Start()
     {
-        defaultColor = defaultMat.color;
+        defaultMat.color = defaultColor;
     }
 
     public void EntityAction(Vector3 direction)
@@ -46,18 +48,19 @@ public class Tile : MonoBehaviour
     IEnumerator doFlashColor()
     {
         float flashSpeed = 2;
+        float flashingTimer = 0;
 
         Color defaultColor = this.defaultColor;
         Color flashColor = this.flashColor;
 
         while(isSelected)
         {
-            Debug.Log("Flashing");
-            defaultMat.color = Color.Lerp(defaultColor, flashColor, Mathf.PingPong(2 * flashSpeed, 1));
+            defaultMat.color = Color.Lerp(defaultColor, flashColor, Mathf.PingPong(flashingTimer * flashSpeed, 1));
 
+            flashingTimer += Time.deltaTime;
             yield return null;
         }
-        //defaultMat.color = defaultColor;
+        defaultMat.color = defaultColor;
     }
 
     // Accessors and Mutators

@@ -46,8 +46,8 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\_Scripts\Controller.cs" />
+     <Compile Include="Assets\_Scripts\Entity.cs" />
      <Compile Include="Assets\_Scripts\MapGenerator.cs" />
-     <Compile Include="Assets\_Scripts\Pawn.cs" />
      <Compile Include="Assets\_Scripts\Tile.cs" />
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>

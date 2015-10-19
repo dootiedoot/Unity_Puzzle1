@@ -3,8 +3,9 @@ using System.Collections;
 
 public class Controller : MonoBehaviour
 {
-    private bool hasSelected = false;
     private MapGenerator _map;
+
+    [SerializeField] private GameObject selectedTile;
 
     void Awake()
     {
@@ -31,16 +32,19 @@ public class Controller : MonoBehaviour
                 {
                     ClearSelections();
                     GameObject[] adjacentTiles = getAdjacentTiles(hit.collider.GetComponent<Tile>());
-                    if (!hasSelected)
+
+                    if (!selectedTile)
                     {
                         showTileSelected(adjacentTiles);
-                        hasSelected = true;
+                        selectedTile = hit.collider.gameObject;
                     }
-                    else
+                    else if(hit.collider.gameObject == selectedTile)
                     {
                         doEntityAction(adjacentTiles);
-                        hasSelected = false;
+                        selectedTile = null;
                     }
+                    else
+                        selectedTile = null;
                 }
             }
         }
@@ -48,11 +52,12 @@ public class Controller : MonoBehaviour
 
     public GameObject[] getAdjacentTiles(Tile tile)
     {
-        GameObject[] adjacentTiles = new GameObject[4];
+        GameObject[] adjacentTiles = new GameObject[5];
         adjacentTiles[0] = tile.TopTile;
         adjacentTiles[1] = tile.RightTile;
         adjacentTiles[2] = tile.BottomTile;
         adjacentTiles[3] = tile.LeftTile;
+        adjacentTiles[4] = tile.gameObject;
         return adjacentTiles;
     }
 
@@ -64,7 +69,7 @@ public class Controller : MonoBehaviour
 
     void showTileSelected(GameObject[] adjacentTiles)
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
         {
             if (adjacentTiles[i] != null)
             {

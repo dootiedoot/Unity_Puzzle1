@@ -8,7 +8,7 @@ public class Entity : MonoBehaviour
     private GameObject previousTile;
 
     public float moveDuration;
-    public int moveDistance;
+    [SerializeField] private int moveDistance;
 
     private bool isMoving = false;
 
@@ -54,6 +54,11 @@ public class Entity : MonoBehaviour
         }
     }
 
+    public void ShowMoveTiles()
+    {
+
+    }
+
     // public method to perform Move action
     public void Move(Vector3 direction)
     {
@@ -63,18 +68,24 @@ public class Entity : MonoBehaviour
 
     IEnumerator Move(Transform source, Vector3 direction, int distance, float overTime)
     {
-        isMoving = true;
-        transform.rotation = Quaternion.LookRotation(direction);
-        Vector3 newPosition = source.position + direction * distance;
-        float startTime = Time.time;
-        while (Time.time < startTime + overTime)
+        for(int i = 0; i < distance; i++)
         {
-            source.position = Vector3.Lerp(source.position, newPosition, (Time.time - startTime) / overTime);
-            yield return null;
+            isMoving = true;
+            transform.rotation = Quaternion.LookRotation(direction);
+            Vector3 newPosition = source.position + direction;
+            float startTime = Time.time;
+            while (Time.time < startTime + overTime)
+            {
+                source.position = Vector3.Lerp(source.position, newPosition, (Time.time - startTime) / overTime);
+                if (source.position == newPosition)
+                    break;
+                yield return null;
+            }
+            source.position = newPosition;
+            UpdatePosition();
+            isMoving = false;
         }
-        source.position = newPosition;
-        UpdatePosition();
-        isMoving = false;
+        Debug.Log(gameObject.name + " finished move in " + Time.time + " seconds");
     }
 
     // Accessors and Mutators
@@ -87,5 +98,10 @@ public class Entity : MonoBehaviour
     {
         get { return isMoving; }
         set { isMoving = value; }
+    }
+    public int GetMoveDistance
+    {
+        get { return moveDistance; }
+        set { moveDistance = value; }
     }
 }
