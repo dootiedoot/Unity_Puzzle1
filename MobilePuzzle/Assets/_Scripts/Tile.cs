@@ -36,8 +36,8 @@ public class Tile : MonoBehaviour
 
     public void EntityAction(Vector3 direction)
     {
-        if(currentTileEnitity != null)
-            currentTileEnitity.GetComponent<Entity>().Move(direction);
+        if(currentTileEnitity != null && !currentTileEnitity.CompareTag("Obstacle"))
+            currentTileEnitity.GetComponent<EntityMotor>().Move(direction);
     }
 
     public void FlashColor(){
