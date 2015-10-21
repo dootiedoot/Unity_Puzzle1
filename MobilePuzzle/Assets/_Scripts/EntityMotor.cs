@@ -104,7 +104,7 @@ public class EntityMotor : MonoBehaviour
     IEnumerator Move(Transform source, Vector3 direction, int distance, float overTime)
     {
         isMoving = true;
-        transform.rotation = Quaternion.LookRotation(direction);
+        //transform.rotation = Quaternion.LookRotation(direction);
         Vector3 newPosition = source.position + direction * distance;
         float startTime = Time.time;
         while (Time.time < startTime + overTime)

@@ -69,9 +69,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\_Scripts\Controller.cs" />
-    <Compile Include="Assets\_Scripts\Entity.cs" />
+    <Compile Include="Assets\_Scripts\ControllingCameraAspect.cs" />
+    <Compile Include="Assets\_Scripts\EntityMotor.cs" />
     <Compile Include="Assets\_Scripts\MapGenerator.cs" />
+    <Compile Include="Assets\_Scripts\Obstacle.cs" />
     <Compile Include="Assets\_Scripts\Tile.cs" />
+    <Compile Include="Assets\_Scripts\UIControls.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
