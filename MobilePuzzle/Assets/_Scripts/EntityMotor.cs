@@ -3,6 +3,9 @@ using System.Collections;
 
 public class EntityMotor : MonoBehaviour
 {
+    public delegate void ClickAction();
+    public static event ClickAction OnAction;
+
     [SerializeField] private Vector2 currentCoords;
     [SerializeField] private GameObject currentTile;
     private GameObject previousTile;
@@ -67,28 +70,36 @@ public class EntityMotor : MonoBehaviour
     private int GetMoveAmount(Vector3 direction, GameObject currentTile)
     {
         Tile _tile = currentTile.GetComponent<Tile>();
-        if(moveAmount < moveDistance && direction == Vector3.forward && _tile.TopTile && !_tile.TopTile.GetComponent<Tile>().CurrentTileEnitity)
+        if (moveAmount < moveDistance)
         {
-            moveAmount++;
-            GetMoveAmount(direction, _tile.TopTile);
-        }
-        else if(moveAmount < moveDistance && direction == Vector3.right && _tile.RightTile && !_tile.RightTile.GetComponent<Tile>().CurrentTileEnitity)
-        {
-            moveAmount++;
-            GetMoveAmount(direction, _tile.RightTile);
-        }
-        else if(moveAmount < moveDistance && direction == Vector3.back && _tile.BottomTile && !_tile.BottomTile.GetComponent<Tile>().CurrentTileEnitity)
-        {
-             moveAmount++;
-            GetMoveAmount(direction, _tile.BottomTile);
-        }
-        else if(moveAmount < moveDistance && direction == Vector3.left && _tile.LeftTile && !_tile.LeftTile.GetComponent<Tile>().CurrentTileEnitity)
-        {
-            moveAmount++;
-            GetMoveAmount(direction, _tile.LeftTile);
+            if (direction == Vector3.forward && _tile.TopTile && CheckEntity(_tile.TopTile.GetComponent<Tile>())){
+                moveAmount++;
+                GetMoveAmount(direction, _tile.TopTile);
+            }
+            else if (direction == Vector3.right && _tile.RightTile && CheckEntity(_tile.RightTile.GetComponent<Tile>())){
+                moveAmount++;
+                GetMoveAmount(direction, _tile.RightTile);
+            }
+            else if (direction == Vector3.back && _tile.BottomTile && CheckEntity(_tile.BottomTile.GetComponent<Tile>())){
+                moveAmount++;
+                GetMoveAmount(direction, _tile.BottomTile);
+            }
+            else if (direction == Vector3.left && _tile.LeftTile && CheckEntity(_tile.LeftTile.GetComponent<Tile>())){
+                moveAmount++;
+                GetMoveAmount(direction, _tile.LeftTile);
+            }
         }
         //Debug.Log("Movement Check");
         return moveAmount;
+    }
+
+    // If there is a entity on the tile, check for its type and return a boolean that determines if that tile is walkable
+    private bool CheckEntity(Tile tile)
+    {
+        bool isWalkable = true;
+        if (tile.CurrentTileEnitity)
+            isWalkable = false;
+        return isWalkable;
     }
 
     // public method to perform Move action
@@ -118,6 +129,9 @@ public class EntityMotor : MonoBehaviour
         UpdatePosition();
         isMoving = false;
         //Debug.Log(gameObject.name + " finished move in " + Time.time + " seconds");
+        // Send an event to update turn
+        if (OnAction != null)
+            OnAction();
     }
 
     // Accessors and Mutators

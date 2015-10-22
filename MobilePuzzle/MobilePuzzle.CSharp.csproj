@@ -68,11 +68,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Spin.cs" />
+    <Compile Include="Assets\_Scripts\CameraController.cs" />
     <Compile Include="Assets\_Scripts\Controller.cs" />
-    <Compile Include="Assets\_Scripts\ControllingCameraAspect.cs" />
     <Compile Include="Assets\_Scripts\EntityMotor.cs" />
+    <Compile Include="Assets\_Scripts\EntityType.cs" />
     <Compile Include="Assets\_Scripts\MapGenerator.cs" />
     <Compile Include="Assets\_Scripts\Obstacle.cs" />
+    <Compile Include="Assets\_Scripts\Portal.cs" />
     <Compile Include="Assets\_Scripts\Tile.cs" />
     <Compile Include="Assets\_Scripts\UIControls.cs" />
   </ItemGroup>

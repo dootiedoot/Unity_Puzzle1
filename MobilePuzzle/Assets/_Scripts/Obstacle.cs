@@ -31,4 +31,10 @@ public class Obstacle : MonoBehaviour
             }
         }
     }
+
+    public void Die()
+    {
+        Destroy(gameObject);
+        currentTile.GetComponent<Tile>().CurrentTileEnitity = null;
+    }
 }
