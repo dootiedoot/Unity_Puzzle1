@@ -58,6 +58,16 @@ public class Tile : MonoBehaviour
         return doesContain;
     }
 
+    public GameObject GetEntityByTag(string tag)
+    {
+        GameObject retrivalEntity = null;
+        if (TileEnitities.Count != 0)
+            foreach (GameObject tileEntity in TileEnitities)
+                if (tileEntity.CompareTag(tag))
+                    retrivalEntity = tileEntity;
+        return retrivalEntity;
+    }
+
     public void RemoveEntity(GameObject entity)
     {
         if (TileEnitities.Count != 0)

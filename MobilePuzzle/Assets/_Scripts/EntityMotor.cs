@@ -16,6 +16,13 @@ public class EntityMotor : MonoBehaviour
 
     private bool isMoving = false;
 
+    private EntityType _EntityType;
+
+    void Awake()
+    {
+        _EntityType = GetComponent<EntityType>();
+    }
+
     void Start()
     {
         // Initial entity-to-tile setup
@@ -93,8 +100,15 @@ public class EntityMotor : MonoBehaviour
         bool isWalkable = true;
         if (tile.TileEnitities.Count != 0)
         {
-            if(tile.ContainsEntityTag("Obstacle"))
+            if (tile.ContainsEntityTag("Obstacle"))
                 isWalkable = false;
+
+            else if (tile.ContainsEntityTag("Portal"))
+                if ((int)tile.GetEntityByTag("Portal").GetComponent<Portal>().acceptedType == (int)_EntityType.myType)
+                {
+                    moveAmount = moveDistance-1;
+                    Debug.Log("At Portal");
+                }
         }
         return isWalkable;
     }

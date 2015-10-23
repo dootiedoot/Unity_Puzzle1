@@ -47,7 +47,7 @@ public class Portal : MonoBehaviour
 
     void CheckSubject()
     {
-        Debug.Log("Check!");
+        //Debug.Log("Check!");
         if(currentTile.GetComponent<Tile>().TileEnitities.Count != 0)
         {
             /*
