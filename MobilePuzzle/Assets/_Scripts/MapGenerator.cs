@@ -6,7 +6,7 @@ public class MapGenerator : MonoBehaviour
     // VARIABLES
 	public Transform tilePrefab;
 	public Vector2 mapSize;
-    [SerializeField] private GameObject[] tiles;
+    public static GameObject[] tiles;
 
 	[Range(0,1)]
 	public float outlinePercent;

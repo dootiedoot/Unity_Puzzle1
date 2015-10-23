@@ -3,13 +3,11 @@ using System.Collections;
 
 public class Controller : MonoBehaviour
 {
-    private MapGenerator _map;
-
     [SerializeField] private GameObject selectedTile;
 
     void Awake()
     {
-        _map = GameObject.FindWithTag("MapGenerator").GetComponent<MapGenerator>();
+       
     }
 
 	// Use this for initialization
@@ -28,12 +26,12 @@ public class Controller : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 // if the hit object is a tile and doesn't have a entity on it
-                if (hit.collider.CompareTag("Tile") && !hit.collider.GetComponent<Tile>().CurrentTileEnitity)
+                if (hit.collider.CompareTag("Tile") && hit.collider.GetComponent<Tile>().TileEnitities.Count == 0)
                 {
                     ClearSelections();
                     GameObject[] adjacentTiles = getAdjacentTiles(hit.collider.GetComponent<Tile>());
 
-                    if (!selectedTile)
+                    /*if (!selectedTile)  
                     {
                         showTileSelected(adjacentTiles);
                         selectedTile = hit.collider.gameObject;
@@ -44,7 +42,10 @@ public class Controller : MonoBehaviour
                         selectedTile = null;
                     }
                     else
-                        selectedTile = null;
+                        selectedTile = null;*/
+
+                    doEntityAction(adjacentTiles);
+                    selectedTile = null;
                 }
             }
         }
@@ -63,7 +64,7 @@ public class Controller : MonoBehaviour
 
     void ClearSelections()
     {
-        foreach (GameObject tile in _map.Tiles)
+        foreach (GameObject tile in MapGenerator.tiles)
             tile.GetComponent<Tile>().isSelected = false;
     }
 

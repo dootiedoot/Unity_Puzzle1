@@ -16,25 +16,18 @@ public class EntityMotor : MonoBehaviour
 
     private bool isMoving = false;
 
-    private MapGenerator _map;
-
-    void Awake()
-    {
-        _map = GameObject.FindWithTag("MapGenerator").GetComponent<MapGenerator>();
-    }
-
     void Start()
     {
         // Initial entity-to-tile setup
         currentCoords = new Vector2((int)transform.position.x, (int)transform.position.z);
         transform.position = new Vector3(currentCoords.x, transform.position.y, currentCoords.y);   // Lock transform into int coordinates
-        foreach (GameObject tile in _map.Tiles)
+        foreach (GameObject tile in MapGenerator.tiles)
         {
             Tile _tile = tile.GetComponent<Tile>();
             if (_tile.TileCoord == currentCoords)
             {
                 currentTile = tile;
-                _tile.CurrentTileEnitity = gameObject;
+                _tile.TileEnitities.Add(gameObject);
                 previousTile = currentTile;
                 break;
             }
@@ -46,15 +39,16 @@ public class EntityMotor : MonoBehaviour
     {
         currentCoords = new Vector2((int)transform.position.x, (int)transform.position.z);
         transform.position = new Vector3(currentCoords.x, transform.position.y, currentCoords.y);   // Lock transform into int coordinates
-        foreach (GameObject tile in _map.Tiles)
+        foreach (GameObject tile in MapGenerator.tiles)
         {
             Tile _tile = tile.GetComponent<Tile>();
             if (_tile.TileCoord == currentCoords)
             {
                 currentTile = tile;
-                _tile.CurrentTileEnitity = gameObject;
-                if(previousTile != currentTile)
-                    previousTile.GetComponent<Tile>().CurrentTileEnitity = null;
+                if(!_tile.TileEnitities.Contains(gameObject))
+                    _tile.TileEnitities.Add(gameObject);
+                if (previousTile != currentTile)
+                    previousTile.GetComponent<Tile>().RemoveEntity(gameObject);
                 previousTile = currentTile;
                 break;
             }
@@ -72,19 +66,19 @@ public class EntityMotor : MonoBehaviour
         Tile _tile = currentTile.GetComponent<Tile>();
         if (moveAmount < moveDistance)
         {
-            if (direction == Vector3.forward && _tile.TopTile && CheckEntity(_tile.TopTile.GetComponent<Tile>())){
+            if (direction == Vector3.forward && _tile.TopTile && isWalkableTile(_tile.TopTile.GetComponent<Tile>())){
                 moveAmount++;
                 GetMoveAmount(direction, _tile.TopTile);
             }
-            else if (direction == Vector3.right && _tile.RightTile && CheckEntity(_tile.RightTile.GetComponent<Tile>())){
+            else if (direction == Vector3.right && _tile.RightTile && isWalkableTile(_tile.RightTile.GetComponent<Tile>())){
                 moveAmount++;
                 GetMoveAmount(direction, _tile.RightTile);
             }
-            else if (direction == Vector3.back && _tile.BottomTile && CheckEntity(_tile.BottomTile.GetComponent<Tile>())){
+            else if (direction == Vector3.back && _tile.BottomTile && isWalkableTile(_tile.BottomTile.GetComponent<Tile>())){
                 moveAmount++;
                 GetMoveAmount(direction, _tile.BottomTile);
             }
-            else if (direction == Vector3.left && _tile.LeftTile && CheckEntity(_tile.LeftTile.GetComponent<Tile>())){
+            else if (direction == Vector3.left && _tile.LeftTile && isWalkableTile(_tile.LeftTile.GetComponent<Tile>())){
                 moveAmount++;
                 GetMoveAmount(direction, _tile.LeftTile);
             }
@@ -94,11 +88,14 @@ public class EntityMotor : MonoBehaviour
     }
 
     // If there is a entity on the tile, check for its type and return a boolean that determines if that tile is walkable
-    private bool CheckEntity(Tile tile)
+    private bool isWalkableTile(Tile tile)
     {
         bool isWalkable = true;
-        if (tile.CurrentTileEnitity)
-            isWalkable = false;
+        if (tile.TileEnitities.Count != 0)
+        {
+            if(tile.ContainsEntityTag("Obstacle"))
+                isWalkable = false;
+        }
         return isWalkable;
     }
 

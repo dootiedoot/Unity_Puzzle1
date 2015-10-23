@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Tile : MonoBehaviour
 {
@@ -8,7 +9,8 @@ public class Tile : MonoBehaviour
     int xCoord;
     int yCoord;
 
-    [SerializeField] private GameObject currentTileEnitity;
+    public List<GameObject> TileEnitities = new List<GameObject>();
+    //[SerializeField] private GameObject currentTileEnitity;
     [SerializeField] private GameObject topTile;
     [SerializeField] private GameObject rightTile;
     [SerializeField] private GameObject bottomTile;
@@ -36,11 +38,42 @@ public class Tile : MonoBehaviour
 
     public void EntityAction(Vector3 direction)
     {
-        if(currentTileEnitity != null && !currentTileEnitity.CompareTag("Obstacle"))
-            currentTileEnitity.GetComponent<EntityMotor>().Move(direction);
+        if(TileEnitities.Count != 0)
+        {
+            foreach(GameObject tileEntity in TileEnitities)
+            {
+                if (tileEntity.CompareTag("Player"))
+                    tileEntity.GetComponent<EntityMotor>().Move(direction);
+            }
+        }
     }
 
-    public void FlashColor(){
+    public bool ContainsEntityTag(string tag)
+    {
+        bool doesContain = false;
+        if (TileEnitities.Count != 0)
+            foreach (GameObject tileEntity in TileEnitities)
+                if (tileEntity.CompareTag(tag))
+                    doesContain = true;
+        return doesContain;
+    }
+
+    public void RemoveEntity(GameObject entity)
+    {
+        if (TileEnitities.Count != 0)
+        {
+            GameObject removalEntity = null;
+
+            foreach (GameObject tileEntity in TileEnitities)
+                if (tileEntity == entity)
+                    removalEntity = tileEntity;
+
+            TileEnitities.Remove(removalEntity);
+        }
+    }
+
+    public void FlashColor()
+    {
         isSelected = true;
         StartCoroutine(doFlashColor());
     }
@@ -68,11 +101,6 @@ public class Tile : MonoBehaviour
     {
         get { return tileCoord; }
         set { tileCoord = value; }
-    }
-    public GameObject CurrentTileEnitity
-    {
-        get { return currentTileEnitity; }
-        set { currentTileEnitity = value; }
     }
     public GameObject TopTile
     {
