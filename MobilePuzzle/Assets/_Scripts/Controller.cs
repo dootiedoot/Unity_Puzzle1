@@ -43,7 +43,7 @@ public class Controller : MonoBehaviour
                     }
                     else
                         selectedTile = null;*/
-
+                
                     doEntityAction(adjacentTiles);
                     selectedTile = null;
                 }

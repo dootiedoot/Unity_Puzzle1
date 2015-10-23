@@ -48,20 +48,16 @@ public class Portal : MonoBehaviour
     void CheckSubject()
     {
         //Debug.Log("Check!");
-        if(currentTile.GetComponent<Tile>().TileEnitities.Count != 0)
+        Tile _tile = currentTile.GetComponent<Tile>();
+        if (_tile.TileEnitities.Count != 0 && _tile.ContainsEntityTag("Player"))
         {
-            /*
-            GameObject entity = currentTile.GetComponent<Tile>().CurrentTileEnitity;
-            if(entity.GetComponent<EntityType>())
+            GameObject entity = _tile.GetEntityByTag("Player");
+            if ((int)entity.GetComponent<EntityType>().myType == (int)acceptedType)
             {
-                EntityType _entityType = entity.GetComponent<EntityType>();
-                if ((int)_entityType.myType == (int)acceptedType)
-                {
-                    Debug.Log("Goal!");
-                    currentTile.GetComponent<Tile>().CurrentTileEnitity = null;
-                    Destroy(entity);
-                }
-            }*/
+                Debug.Log("Goal: " + entity.name);
+                _tile.RemoveEntity(entity);
+                Destroy(entity);
+            }
         }
     }
 }

@@ -70,9 +70,9 @@ public class EntityMotor : MonoBehaviour
     // Recursion that Calculate how many tiles it can possibly move without interference.
     private int GetMoveAmount(Vector3 direction, GameObject currentTile)
     {
-        Tile _tile = currentTile.GetComponent<Tile>();
         if (moveAmount < moveDistance)
         {
+            Tile _tile = currentTile.GetComponent<Tile>();
             if (direction == Vector3.forward && _tile.TopTile && isWalkableTile(_tile.TopTile.GetComponent<Tile>())){
                 moveAmount++;
                 GetMoveAmount(direction, _tile.TopTile);
@@ -100,14 +100,14 @@ public class EntityMotor : MonoBehaviour
         bool isWalkable = true;
         if (tile.TileEnitities.Count != 0)
         {
-            if (tile.ContainsEntityTag("Obstacle"))
+            if (tile.ContainsEntityTag("Obstacle") || tile.ContainsEntityTag("Player"))
                 isWalkable = false;
 
             else if (tile.ContainsEntityTag("Portal"))
                 if ((int)tile.GetEntityByTag("Portal").GetComponent<Portal>().acceptedType == (int)_EntityType.myType)
                 {
-                    moveAmount = moveDistance-1;
-                    Debug.Log("At Portal");
+                    moveAmount++;
+                    isWalkable = false;
                 }
         }
         return isWalkable;
@@ -140,7 +140,7 @@ public class EntityMotor : MonoBehaviour
         UpdatePosition();
         isMoving = false;
         //Debug.Log(gameObject.name + " finished move in " + Time.time + " seconds");
-        // Send an event to update turn
+        // Send an event after players have finished moving
         if (OnAction != null)
             OnAction();
     }
