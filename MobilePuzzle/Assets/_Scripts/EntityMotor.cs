@@ -3,24 +3,30 @@ using System.Collections;
 
 public class EntityMotor : MonoBehaviour
 {
+    // VARIABLES
+    // Events
     public delegate void ClickAction();
     public static event ClickAction OnAction;
 
+    // Tiles
     [SerializeField] private Vector2 currentCoords;
     [SerializeField] private GameObject currentTile;
     private GameObject previousTile;
 
-    public float moveDuration;
+    // Moving Attributes
+    public float moveSpeed;
     [SerializeField] private int moveDistance;
     [SerializeField] private int moveAmount = 0;
-
     private bool isMoving = false;
 
+    // Components
     private EntityType _EntityType;
+    private Animator animator;
 
     void Awake()
     {
         _EntityType = GetComponent<EntityType>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     void Start()
@@ -119,26 +125,26 @@ public class EntityMotor : MonoBehaviour
         if (!isMoving)
         {
             moveAmount = 0;
-            StartCoroutine(Move(transform, direction, GetMoveAmount(direction, currentTile), moveDuration));
+            StartCoroutine(Move(transform, direction, GetMoveAmount(direction, currentTile), moveSpeed));
         }
     }
 
-    IEnumerator Move(Transform source, Vector3 direction, int distance, float overTime)
+    IEnumerator Move(Transform source, Vector3 direction, int distance, float speed)
     {
         isMoving = true;
-        //transform.rotation = Quaternion.LookRotation(direction);
+        //transform.rotation = Quaternion.LookRotation(direction);      // To rotate object towards direction or not
+        animator.SetBool("isMoving", isMoving);
         Vector3 newPosition = source.position + direction * distance;
         float startTime = Time.time;
-        while (Time.time < startTime + overTime)
+        while (source.position != newPosition)
         {
-            source.position = Vector3.Lerp(source.position, newPosition, (Time.time - startTime) / overTime);
-            if (source.position == newPosition)
-                break;
+            source.position = Vector3.MoveTowards(source.position, newPosition, Time.deltaTime * speed);
             yield return null;
         }
         source.position = newPosition;
         UpdatePosition();
         isMoving = false;
+        animator.SetBool("isMoving", isMoving);
         //Debug.Log(gameObject.name + " finished move in " + Time.time + " seconds");
         // Send an event after players have finished moving
         if (OnAction != null)
