@@ -10,7 +10,6 @@ public class Tile : MonoBehaviour
     int yCoord;
 
     public List<GameObject> TileEnitities = new List<GameObject>();
-    //[SerializeField] private GameObject currentTileEnitity;
     [SerializeField] private GameObject topTile;
     [SerializeField] private GameObject rightTile;
     [SerializeField] private GameObject bottomTile;
@@ -20,20 +19,21 @@ public class Tile : MonoBehaviour
     //[HideInInspector]
     public bool isSelected = false;
     private Material defaultMat;
-    public Color defaultColor;
-    public Color flashColor;
+    //[SerializeField]
+    private Color defaultColor;
+    [SerializeField] private Color flashColor;
 
     // Use this for initialization
     void Awake ()
     {
-        defaultMat = GetComponent<Renderer>().material;
         tileCoord = new Vector2(transform.position.x, transform.position.z);
         transform.name = tileCoord.x.ToString() + "," + tileCoord.y.ToString();
     }
 
     void Start()
     {
-        defaultMat.color = defaultColor;
+        defaultMat = GetComponent<Renderer>().material;
+        defaultColor = defaultMat.color;
     }
 
     public void EntityAction(Vector3 direction)

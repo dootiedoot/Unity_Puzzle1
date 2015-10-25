@@ -73,6 +73,7 @@
     <Compile Include="Assets\_Scripts\Controller.cs" />
     <Compile Include="Assets\_Scripts\EntityMotor.cs" />
     <Compile Include="Assets\_Scripts\EntityType.cs" />
+    <Compile Include="Assets\_Scripts\GameManager.cs" />
     <Compile Include="Assets\_Scripts\MapGenerator.cs" />
     <Compile Include="Assets\_Scripts\Obstacle.cs" />
     <Compile Include="Assets\_Scripts\Portal.cs" />

@@ -70,33 +70,52 @@ public class EntityMotor : MonoBehaviour
 
     public void ShowMoveTiles()
     {
-
+        CurrentTile.GetComponent<Tile>().FlashColor();
+        moveAmount = 0;
+        GetMoveAmount(Vector3.forward, currentTile, true);
+        moveAmount = 0;
+        GetMoveAmount(Vector3.right, currentTile, true);
+        moveAmount = 0;
+        GetMoveAmount(Vector3.back, currentTile, true);
+        moveAmount = 0;
+        GetMoveAmount(Vector3.left, currentTile, true);
     }
 
     // Recursion that Calculate how many tiles it can possibly move without interference.
-    private int GetMoveAmount(Vector3 direction, GameObject currentTile)
+    private int GetMoveAmount(Vector3 direction, GameObject currentTile, bool isShowTile)
     {
         if (moveAmount < moveDistance)
         {
             Tile _tile = currentTile.GetComponent<Tile>();
-            if (direction == Vector3.forward && _tile.TopTile && isWalkableTile(_tile.TopTile.GetComponent<Tile>())){
+            if (direction == Vector3.forward && _tile.TopTile && isWalkableTile(_tile.TopTile.GetComponent<Tile>()))
+            {
                 moveAmount++;
-                GetMoveAmount(direction, _tile.TopTile);
+                if (isShowTile)
+                    _tile.TopTile.GetComponent<Tile>().FlashColor();
+                GetMoveAmount(direction, _tile.TopTile, isShowTile);
             }
-            else if (direction == Vector3.right && _tile.RightTile && isWalkableTile(_tile.RightTile.GetComponent<Tile>())){
+            else if (direction == Vector3.right && _tile.RightTile && isWalkableTile(_tile.RightTile.GetComponent<Tile>()))
+            {
                 moveAmount++;
-                GetMoveAmount(direction, _tile.RightTile);
+                if (isShowTile)
+                    _tile.RightTile.GetComponent<Tile>().FlashColor();
+                GetMoveAmount(direction, _tile.RightTile, isShowTile);
             }
-            else if (direction == Vector3.back && _tile.BottomTile && isWalkableTile(_tile.BottomTile.GetComponent<Tile>())){
+            else if (direction == Vector3.back && _tile.BottomTile && isWalkableTile(_tile.BottomTile.GetComponent<Tile>()))
+            {
                 moveAmount++;
-                GetMoveAmount(direction, _tile.BottomTile);
+                if (isShowTile)
+                    _tile.BottomTile.GetComponent<Tile>().FlashColor();
+                GetMoveAmount(direction, _tile.BottomTile, isShowTile);
             }
-            else if (direction == Vector3.left && _tile.LeftTile && isWalkableTile(_tile.LeftTile.GetComponent<Tile>())){
+            else if (direction == Vector3.left && _tile.LeftTile && isWalkableTile(_tile.LeftTile.GetComponent<Tile>()))
+            {
                 moveAmount++;
-                GetMoveAmount(direction, _tile.LeftTile);
+                if (isShowTile)
+                    _tile.LeftTile.GetComponent<Tile>().FlashColor();
+                GetMoveAmount(direction, _tile.LeftTile, isShowTile);
             }
         }
-        //Debug.Log("Movement Check");
         return moveAmount;
     }
 
@@ -125,7 +144,7 @@ public class EntityMotor : MonoBehaviour
         if (!isMoving)
         {
             moveAmount = 0;
-            StartCoroutine(Move(transform, direction, GetMoveAmount(direction, currentTile), moveSpeed));
+            StartCoroutine(Move(transform, direction, GetMoveAmount(direction, currentTile, false), moveSpeed));
         }
     }
 
