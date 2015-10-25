@@ -12,6 +12,11 @@ public class MapGenerator : MonoBehaviour
 	[Range(0,1)]
 	public float outlinePercent;
 
+    // Visuals
+    private bool isFirstMat = true;
+    public Material firstMat;
+    public Material secondMat;
+
 	void Awake()
     {
 		GenerateMap();
@@ -44,7 +49,21 @@ public class MapGenerator : MonoBehaviour
 
                 tiles[totalTiles] = newTile.gameObject;
                 totalTiles++;
+
+                // Visuals - Assign material to create the checkerboard effect
+                Renderer rend = newTile.GetComponent<Renderer>();
+                if(isFirstMat)
+                {
+                    rend.sharedMaterial = firstMat;
+                    isFirstMat = false;
+                }
+                else
+                {
+                    rend.sharedMaterial = secondMat;
+                    isFirstMat = true;
+                }
             }
+            isFirstMat = !isFirstMat;   // Alternate tile material at the start of each X interval
         }
     }
 

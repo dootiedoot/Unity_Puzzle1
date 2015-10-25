@@ -136,7 +136,7 @@ public class EntityMotor : MonoBehaviour
         animator.SetBool("isMoving", isMoving);
         Vector3 newPosition = source.position + direction * distance;
         float startTime = Time.time;
-        while (source.position != newPosition)
+        while (source.position != newPosition) // Use (Time.time < startTime + overTime) for acceleration style movement
         {
             source.position = Vector3.MoveTowards(source.position, newPosition, Time.deltaTime * speed);
             yield return null;
