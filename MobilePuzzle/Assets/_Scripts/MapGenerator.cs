@@ -4,7 +4,7 @@ using System.Collections;
 public class MapGenerator : MonoBehaviour
 {
     // VARIABLES
-	public Transform tilePrefab;
+	public Transform[] tilePrefabs;
 	public Vector2 mapSize;
     public float Yoffset;
     public static GameObject[] tiles;
@@ -42,7 +42,7 @@ public class MapGenerator : MonoBehaviour
             {
                 //Vector3 tilePosition = new Vector3(-mapSize.x/2 + 0.5f + x, 0, -mapSize.y/2 + 0.5f + y);
                 Vector3 tilePosition = new Vector3(x, Yoffset, y);
-                Transform newTile = Instantiate(tilePrefab, tilePosition, Quaternion.Euler(Vector3.right * 90)) as Transform;
+                Transform newTile = Instantiate(tilePrefabs[Random.Range(0, tilePrefabs.Length)], tilePosition, Quaternion.Euler(Vector3.right * 90)) as Transform;
                 newTile.localScale = Vector3.one * (1 - outlinePercent);
                 //newTile.parent = mapHolder;
                 newTile.parent = transform;
