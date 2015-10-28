@@ -51,7 +51,7 @@ public class Controller : MonoBehaviour
                 else if(hit.collider.CompareTag("Player"))
                 {
                     ClearSelections();
-                    hit.collider.GetComponent<EntityMotor>().ShowMoveTiles();
+                    //hit.collider.GetComponent<EntityMotor>().ShowMoveTiles();
                     selectedTile = null;
                 }
             }

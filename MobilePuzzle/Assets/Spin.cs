@@ -3,10 +3,12 @@ using System.Collections;
 
 public class Spin : MonoBehaviour
 {
-    public float Speed;
+    public float speedX;
+    public float speedY;
+    public float speedZ;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
 	
 	}
@@ -14,6 +16,6 @@ public class Spin : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate ()
     {
-	    transform.Rotate(0, 90 * Speed * Time.deltaTime, 0, Space.Self);
+	    transform.Rotate(speedX * Time.deltaTime, speedY * Time.deltaTime, speedZ * Time.deltaTime, Space.Self);
     }
 }
