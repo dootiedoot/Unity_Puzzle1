@@ -121,8 +121,22 @@ public class EntityMotor : MonoBehaviour
         bool isWalkable = true;
         if (tile.TileEnitities.Count != 0)
         {
-            if (tile.ContainsEntityTag("Obstacle") || tile.ContainsEntityTag("Player"))
+            // if the object ahead is obstacle or another player then don't move
+            if (tile.ContainsEntityTag("Obstacle") || tile.ContainsEntityTag("Player") || (tile.ContainsEntityTag("Lock") && !CompareTag("Interactive")))
                 return isWalkable = false;
+            // if the object ahead is an a Lock and entitiy is a interactive
+            else if(tile.ContainsEntityTag("Lock") && CompareTag("Interactive"))
+            {
+                Debug.Log("is Lock and subject is key");
+                EntityInteractive _entityInteractive = GetComponent<EntityInteractive>();
+                Lock _lock = tile.GetEntityByTag("Lock").GetComponent<Lock>();
+                if ((int)_entityInteractive.myType == (int)_lock.acceptedType)
+                {
+                    Debug.Log("Key Matches");
+                    moveAmount++;
+                    return isWalkable = false;
+                }
+            }
             else if (tile.ContainsEntityTag("Portal") && CompareTag("Player"))
             {
                 if ((int)tile.GetEntityByTag("Portal").GetComponent<Portal>().acceptedType == (int)_EntityType.myType)

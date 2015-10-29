@@ -28,8 +28,7 @@ public class GameManager : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if(isPlayerTurn)
-            Debug.Log("Players Turn");
+
 	}
 
     void CheckTurn()
@@ -39,7 +38,7 @@ public class GameManager : MonoBehaviour
             EntityMotor _entityMotor = player.GetComponent<EntityMotor>();
             if (_entityMotor.IsMoving)
             {
-                Debug.Log("not ur turn!");
+                //Debug.Log("not ur turn!");
                 isPlayerTurn = false;
                 break;
             }

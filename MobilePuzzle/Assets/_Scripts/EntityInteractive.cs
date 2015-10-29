@@ -3,25 +3,18 @@ using System.Collections;
 
 public class EntityInteractive : MonoBehaviour
 {
-    [SerializeField]
-    private bool isMovable;
+    public enum Type { Gold, Silver, Bronze };
+    public Type myType;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start()
     {
-	
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-	
-	}
 
-    // Accessors and Mutators
-    public bool IsMoveable
+    }
+
+    // Update is called once per frame
+    void Update()
     {
-        get { return isMovable; }
-        set { isMovable = value; }
+
     }
 }
