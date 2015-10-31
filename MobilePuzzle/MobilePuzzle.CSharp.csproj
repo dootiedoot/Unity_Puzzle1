@@ -69,19 +69,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\_Scripts\Destructible.cs" />
-    <Compile Include="Assets\_Scripts\Destructor.cs" />
+    <Compile Include="Assets\_Scripts\EntityDestructor.cs" />
     <Compile Include="Assets\_Scripts\EntityInteractive.cs" />
     <Compile Include="Assets\_Scripts\EntityMotor.cs" />
     <Compile Include="Assets\_Scripts\EntityType.cs" />
     <Compile Include="Assets\_Scripts\Exit.cs" />
     <Compile Include="Assets\_Scripts\GameManager.cs" />
-    <Compile Include="Assets\_Scripts\Lock.cs" />
+    <Compile Include="Assets\_Scripts\Interactable.cs" />
     <Compile Include="Assets\_Scripts\MapGenerator.cs" />
     <Compile Include="Assets\_Scripts\Obstacle.cs" />
     <Compile Include="Assets\_Scripts\PlayerController.cs" />
     <Compile Include="Assets\_Scripts\Spin.cs" />
+    <Compile Include="Assets\_Scripts\Tags.cs" />
     <Compile Include="Assets\_Scripts\Tile.cs" />
     <Compile Include="Assets\_Scripts\UIControls.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Sci-Fi Music Pack\License.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

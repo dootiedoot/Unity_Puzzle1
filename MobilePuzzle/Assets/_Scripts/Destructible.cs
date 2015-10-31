@@ -27,19 +27,19 @@ public class Destructible : MonoBehaviour
     {
         yield return new WaitForSeconds(DetonationDelay);
 
-        GameObject[] adjacentTiles = _obstacle._currentTile.GetAdjacentTiles();
+        Tile[] adjacentTiles = _obstacle.CurrentTile.GetAdjacentTiles();
         for (int i = 0; i < 4; i++)
         {
             if (adjacentTiles[i] != null)
             {
                 Tile _tile = adjacentTiles[i].GetComponent<Tile>();
-                if (_tile.ContainsEntityTag("Destructible"))
+                if (_tile.ContainsEntityTag(Tags.Destructible))
                 {
-                    _tile.GetEntityByTag("Destructible").GetComponent<Destructible>().Detonate();
+                    _tile.GetEntityByTag(Tags.Destructible).GetComponent<Destructible>().Detonate();
                 }
             }
         }
-        _obstacle._currentTile.RemoveEntity(gameObject);
+        _obstacle.CurrentTile.RemoveEntity(gameObject);
         Destroy(gameObject);
     }
 }

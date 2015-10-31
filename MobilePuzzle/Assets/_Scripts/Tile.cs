@@ -11,10 +11,10 @@ public class Tile : MonoBehaviour
     int yCoord;
 
     public List<GameObject> TileEnitities = new List<GameObject>();
-    [SerializeField] private GameObject topTile;
-    [SerializeField] private GameObject rightTile;
-    [SerializeField] private GameObject bottomTile;
-    [SerializeField] private GameObject leftTile;
+    [SerializeField] private Tile topTile;
+    [SerializeField] private Tile rightTile;
+    [SerializeField] private Tile bottomTile;
+    [SerializeField] private Tile leftTile;
 
     // visuals
     //[HideInInspector]
@@ -37,14 +37,14 @@ public class Tile : MonoBehaviour
         defaultColor = defaultMat.color;
     }
 
-    public GameObject[] GetAdjacentTiles()
+    public Tile[] GetAdjacentTiles()
     {
-        GameObject[] adjacentTiles = new GameObject[5];
+        Tile[] adjacentTiles = new Tile[5];
         adjacentTiles[0] = topTile;
         adjacentTiles[1] = rightTile;
         adjacentTiles[2] = bottomTile;
         adjacentTiles[3] = leftTile;
-        adjacentTiles[4] = gameObject;
+        adjacentTiles[4] = this;
         return adjacentTiles;
     }
 
@@ -54,7 +54,7 @@ public class Tile : MonoBehaviour
         {
             foreach(GameObject tileEntity in TileEnitities)
             {
-                if (tileEntity.CompareTag("Player"))
+                if (tileEntity.CompareTag(Tags.Player))
                     tileEntity.GetComponent<EntityMotor>().Move(direction);
             }
         }
@@ -124,22 +124,22 @@ public class Tile : MonoBehaviour
         get { return tileCoord; }
         set { tileCoord = value; }
     }
-    public GameObject TopTile
+    public Tile TopTile
     {
         get { return topTile; }
         set { topTile = value; }
     }
-    public GameObject RightTile
+    public Tile RightTile
     {
         get { return rightTile; }
         set { rightTile = value; }
     }
-    public GameObject BottomTile
+    public Tile BottomTile
     {
         get { return bottomTile; }
         set { bottomTile = value; }
     }
-    public GameObject LeftTile
+    public Tile LeftTile
     {
         get { return leftTile; }
         set { leftTile = value; }

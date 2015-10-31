@@ -7,7 +7,7 @@ public class MapGenerator : MonoBehaviour
 	public Transform[] tilePrefabs;
 	public Vector2 mapSize;
     public float Yoffset;
-    public static GameObject[] tiles;
+    public static Tile[] tiles;
 
 	[Range(0,1)]
 	public float outlinePercent;
@@ -33,7 +33,7 @@ public class MapGenerator : MonoBehaviour
         mapHolder.parent = transform;
         */
 
-        tiles = new GameObject[(int)(mapSize.x * mapSize.y)];
+        tiles = new Tile[(int)(mapSize.x * mapSize.y)];
         int totalTiles = 0;
 
         for (int x = 0; x < mapSize.x; x++)
@@ -47,7 +47,7 @@ public class MapGenerator : MonoBehaviour
                 //newTile.parent = mapHolder;
                 newTile.parent = transform;
 
-                tiles[totalTiles] = newTile.gameObject;
+                tiles[totalTiles] = newTile.GetComponent<Tile>();
                 totalTiles++;
 
                 // Visuals - Assign material to create the checkerboard effect
@@ -74,7 +74,7 @@ public class MapGenerator : MonoBehaviour
 
     public void AssignAdjacentTiles()
     {
-        foreach (GameObject tile in tiles)
+        foreach (Tile tile in tiles)
         {
             Tile _tile = tile.GetComponent<Tile>();
             Vector2 top     = new Vector2(_tile.TileCoord.x, _tile.TileCoord.y + 1);
@@ -83,7 +83,7 @@ public class MapGenerator : MonoBehaviour
             Vector2 left    = new Vector2(_tile.TileCoord.x - 1, _tile.TileCoord.y);
 
             //print( _tile.name + top + " " + right + " " + bottom + " " +left);
-            foreach (GameObject localTile in tiles)
+            foreach (Tile localTile in tiles)
             {
                 //print(localTile.name);
                 Tile _localTile = localTile.GetComponent<Tile>();
@@ -101,7 +101,7 @@ public class MapGenerator : MonoBehaviour
     }
 
     // Accessors and Mutators
-    public GameObject[] Tiles
+    public Tile[] Tiles
     {
         get { return tiles; }
         set { tiles = value; }

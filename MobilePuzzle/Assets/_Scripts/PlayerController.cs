@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private GameObject selectedTile;
+    [SerializeField] private Tile selectedTile;
 	
 	// Update is called once per frame
 	void Update ()
@@ -15,10 +15,10 @@ public class PlayerController : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 // if the hit object is a tile and doesn't have a entity on it
-                if (hit.collider.CompareTag("Tile") && hit.collider.GetComponent<Tile>().TileEnitities.Count == 0)
+                if (hit.collider.CompareTag(Tags.Tile) && hit.collider.GetComponent<Tile>().TileEnitities.Count == 0)
                 {
                     ClearSelections();
-                    GameObject[] adjacentTiles = hit.collider.GetComponent<Tile>().GetAdjacentTiles();
+                    Tile[] adjacentTiles = hit.collider.GetComponent<Tile>().GetAdjacentTiles();
 
                     /*if (!selectedTile)  
                     {
@@ -36,17 +36,17 @@ public class PlayerController : MonoBehaviour
                     showTileSelected(adjacentTiles);
                     if (!GameManager.IsPlayerMoving)
                         doEntityAction(adjacentTiles);
-                    selectedTile = null;
+                    selectedTile = hit.collider.GetComponent<Tile>();
                 }
-                else if (hit.collider.CompareTag("Player"))
+                else if (hit.collider.CompareTag(Tags.Player))
                 {
                     ClearSelections();
                     //hit.collider.GetComponent<EntityMotor>().ShowMoveTiles();
                     selectedTile = null;
                 }
-                else if (hit.collider.CompareTag("Destructor") && !GameManager.IsPlayerMoving)
+                else if (hit.collider.CompareTag(Tags.Destructor) && !GameManager.IsPlayerMoving)
                 {
-                    hit.collider.GetComponent<Destructor>().Detonate();
+                    hit.collider.GetComponent<EntityDestructor>().Detonate();
                 }
             }
         }
@@ -54,17 +54,18 @@ public class PlayerController : MonoBehaviour
 
     void ClearSelections()
     {
-        foreach (GameObject tile in MapGenerator.tiles)
-            tile.GetComponent<Tile>().isSelected = false;
+        foreach (Tile tile in MapGenerator.tiles)
+            if(tile.GetComponent<Tile>().isSelected != false)
+                tile.GetComponent<Tile>().isSelected = false;
     }
 
-    void showTileSelected(GameObject[] adjacentTiles)
+    void showTileSelected(Tile[] adjacentTiles)
     {
         for (int i = 0; i < 5; i++)
         {
             if (adjacentTiles[i] != null)
             {
-                Tile _tile = adjacentTiles[i].GetComponent<Tile>();
+                Tile _tile = adjacentTiles[i];
 
                 //Visual
                 _tile.FlashColor();
@@ -72,13 +73,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void doEntityAction(GameObject[] adjacentTiles)
+    void doEntityAction(Tile[] adjacentTiles)
     {
         for (int i = 0; i < 4; i++)
         {
             if (adjacentTiles[i] != null)
             {
-                Tile _tile = adjacentTiles[i].GetComponent<Tile>();
+                Tile _tile = adjacentTiles[i];
                 _tile.isSelected = false;
 
                 if (i == 0)

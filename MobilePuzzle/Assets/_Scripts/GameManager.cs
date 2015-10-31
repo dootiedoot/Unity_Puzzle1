@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        players = GameObject.FindGameObjectsWithTag("Player");
+        players = GameObject.FindGameObjectsWithTag(Tags.Player);
     }
 	
 	// Update is called once per frame

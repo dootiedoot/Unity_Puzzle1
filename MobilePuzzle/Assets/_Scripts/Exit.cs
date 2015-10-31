@@ -8,7 +8,7 @@ public class Exit : MonoBehaviour
     [SerializeField]
     private Vector2 currentCoords;
     [SerializeField]
-    private GameObject currentTile;
+    private Tile currentTile;
 
     public enum Type { Red, Blue, Green };
     public Type acceptedType;
@@ -29,12 +29,11 @@ public class Exit : MonoBehaviour
         // Initial entity-to-tile setup
         currentCoords = new Vector2((int)transform.position.x, (int)transform.position.z);
         transform.position = new Vector3(currentCoords.x, transform.position.y, currentCoords.y);   // Lock transform into int coordinates
-        foreach (GameObject tile in MapGenerator.tiles)
+        foreach (Tile _tile in MapGenerator.tiles)
         {
-            Tile _tile = tile.GetComponent<Tile>();
             if (_tile.TileCoord == currentCoords)
             {
-                currentTile = tile;
+                currentTile = _tile;
                 _tile.TileEnitities.Add(gameObject);
                 break;
             }
@@ -44,16 +43,22 @@ public class Exit : MonoBehaviour
     void CheckSubject()
     {
         //Debug.Log("Check!");
-        Tile _tile = currentTile.GetComponent<Tile>();
-        if (_tile.TileEnitities.Count != 0 && _tile.ContainsEntityTag("Player"))
+        if (currentTile.TileEnitities.Count != 0 && currentTile.ContainsEntityTag(Tags.Player))
         {
-            GameObject entity = _tile.GetEntityByTag("Player");
+            GameObject entity = currentTile.GetEntityByTag(Tags.Player);
             if ((int)entity.GetComponent<EntityType>().myType == (int)acceptedType)
             {
                 Debug.Log("Goal: " + entity.name);
-                _tile.RemoveEntity(entity);
+                currentTile.RemoveEntity(entity);
                 Destroy(entity);
             }
         }
+    }
+
+    // Accessors and Mutators
+    public Tile CurrentTile
+    {
+        get { return currentTile; }
+        set { currentTile = value; }
     }
 }
