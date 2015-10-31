@@ -11,14 +11,15 @@ public class EntityMotor : MonoBehaviour
     // Tiles
     [SerializeField] private Vector2 currentCoords;
     [SerializeField] private GameObject currentTile;
+    public Tile _currentTile;
     private GameObject previousTile;
 
     // Moving Attributes
     public float moveSpeed;
     [SerializeField] private int moveDistance;
     [SerializeField] private int moveAmount = 0;
-    private bool isMoving = false;
     private Vector3 previousDirection;
+    private bool isMoving = false;
 
     // Components
     private EntityType _EntityType;
@@ -41,6 +42,7 @@ public class EntityMotor : MonoBehaviour
             if (_tile.TileCoord == currentCoords)
             {
                 currentTile = tile;
+                _currentTile = tile.GetComponent<Tile>();
                 _tile.TileEnitities.Add(gameObject);
                 previousTile = currentTile;
                 break;
@@ -59,7 +61,8 @@ public class EntityMotor : MonoBehaviour
             if (_tile.TileCoord == currentCoords)
             {
                 currentTile = tile;
-                if(!_tile.TileEnitities.Contains(gameObject))
+                _currentTile = tile.GetComponent<Tile>();
+                if (!_tile.TileEnitities.Contains(gameObject))
                     _tile.TileEnitities.Add(gameObject);
                 if (previousTile != currentTile)
                     previousTile.GetComponent<Tile>().RemoveEntity(gameObject);
@@ -121,9 +124,16 @@ public class EntityMotor : MonoBehaviour
         bool isWalkable = true;
         if (tile.TileEnitities.Count != 0)
         {
-            // if the object ahead is obstacle or another player then don't move
-            if (tile.ContainsEntityTag("Obstacle") || tile.ContainsEntityTag("Player") || (tile.ContainsEntityTag("Lock") && !CompareTag("Interactive")))
+            // if the object ahead is an a interactive and entitiy is not a interactive
+            if (tile.ContainsEntityTag("Interactive") && !CompareTag("Interactive"))
+            {
+                if (tile.GetEntityByTag("Interactive").GetComponent<EntityMotor>().GetMoveAmount(previousDirection, tile.gameObject) != 0)
+                {
+                    tile.GetEntityByTag("Interactive").GetComponent<EntityMotor>().Move(previousDirection);
+                    moveAmount++;
+                }
                 return isWalkable = false;
+            }
             // if the object ahead is an a Lock and entitiy is a interactive
             else if(tile.ContainsEntityTag("Lock") && CompareTag("Interactive"))
             {
@@ -137,23 +147,29 @@ public class EntityMotor : MonoBehaviour
                     return isWalkable = false;
                 }
             }
-            else if (tile.ContainsEntityTag("Portal") && CompareTag("Player"))
+
+            // if the object is a destructor & pusher is not a destructor itself then push it destructor by 1 unit
+            if (tile.ContainsEntityTag("Destructor") && !CompareTag("Destructor"))
             {
-                if ((int)tile.GetEntityByTag("Portal").GetComponent<Portal>().acceptedType == (int)_EntityType.myType)
+                if (tile.GetEntityByTag("Destructor").GetComponent<EntityMotor>().GetMoveAmount(previousDirection, tile.gameObject) != 0)
+                {
+                    tile.GetEntityByTag("Destructor").GetComponent<EntityMotor>().Move(previousDirection);
+                    moveAmount++;
+                }
+                return isWalkable = false;
+            }
+
+            else if (tile.ContainsEntityTag("Exit") && CompareTag("Player"))
+            {
+                if ((int)tile.GetEntityByTag("Exit").GetComponent<Exit>().acceptedType == (int)_EntityType.myType)
                 {
                     moveAmount++;
                     return isWalkable = false;
                 }
             }
-            else if (tile.ContainsEntityTag("Interactive"))
-            {
-                if (tile.GetEntityByTag("Interactive").GetComponent<EntityMotor>().GetMoveAmount(previousDirection, tile.gameObject) != 0 && !CompareTag("Interactive"))
-                {
-                    tile.GetEntityByTag("Interactive").GetComponent<EntityMotor>().Move(previousDirection);
-                    moveAmount++;
-                }
+            // if the object ahead is obstacle or another player then don't move
+            else if (tile.ContainsEntityTag("Obstacle") || tile.ContainsEntityTag("Player") || tile.ContainsEntityTag("Lock") || tile.ContainsEntityTag("Destructible"))
                 return isWalkable = false;
-            }
         }
 
         return isWalkable;
@@ -164,35 +180,38 @@ public class EntityMotor : MonoBehaviour
     {
         if (!isMoving)
         {
+            isMoving = true;
+            GameManager.IsPlayerMoving = true;
             StartCoroutine(Move(transform, direction, GetMoveAmount(direction, currentTile), moveSpeed));
-            moveAmount = 0;
         }
     }
 
     IEnumerator Move(Transform source, Vector3 direction, int distance, float speed)
     {
-        isMoving = true;
         //transform.rotation = Quaternion.LookRotation(direction);      // To rotate object towards direction or not
         if(animator)
-            animator.SetBool("isMoving", isMoving);
+            animator.SetBool("isMoving", true);
 
         Vector3 newPosition = source.position + direction * distance;
-        float startTime = Time.time;
-        while (source.position != newPosition) // Use (Time.time < startTime + overTime) for acceleration style movement
+        while (source.position != newPosition)
         {
             source.position = Vector3.MoveTowards(source.position, newPosition, Time.deltaTime * speed);
             yield return null;
         }
         source.position = newPosition;
         UpdatePosition();
-        isMoving = false;
 
         if (animator)
-            animator.SetBool("isMoving", isMoving);
+            animator.SetBool("isMoving", false);
         
+        moveAmount = 0;
+        isMoving = false;
+        GameManager.IsPlayerMoving = false;
+
         // Send an event after players have finished moving
         if (OnAction != null)
             OnAction();
+
     }
 
     // Accessors and Mutators
@@ -201,11 +220,7 @@ public class EntityMotor : MonoBehaviour
         get { return currentTile; }
         set { currentTile = value; }
     }
-    public bool IsMoving
-    {
-        get { return isMoving; }
-        set { isMoving = value; }
-    }
+
     public int GetMoveDistance
     {
         get { return moveDistance; }

@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 public class Tile : MonoBehaviour
 {
-    //VARIABLES
+    // VARIABLES
+    // Tile
     [SerializeField] private Vector2 tileCoord;
     int xCoord;
     int yCoord;
@@ -36,6 +37,17 @@ public class Tile : MonoBehaviour
         defaultColor = defaultMat.color;
     }
 
+    public GameObject[] GetAdjacentTiles()
+    {
+        GameObject[] adjacentTiles = new GameObject[5];
+        adjacentTiles[0] = topTile;
+        adjacentTiles[1] = rightTile;
+        adjacentTiles[2] = bottomTile;
+        adjacentTiles[3] = leftTile;
+        adjacentTiles[4] = gameObject;
+        return adjacentTiles;
+    }
+
     public void EntityAction(Vector3 direction)
     {
         if(TileEnitities.Count != 0)
@@ -53,8 +65,8 @@ public class Tile : MonoBehaviour
         bool doesContain = false;
         if (TileEnitities.Count != 0)
             foreach (GameObject tileEntity in TileEnitities)
-                if (tileEntity.CompareTag(tag))
-                    doesContain = true;
+                if (tileEntity != null && tileEntity.CompareTag(tag))
+                    return doesContain = true;
         return doesContain;
     }
 
@@ -64,7 +76,7 @@ public class Tile : MonoBehaviour
         if (TileEnitities.Count != 0)
             foreach (GameObject tileEntity in TileEnitities)
                 if (tileEntity.CompareTag(tag))
-                    retrivalEntity = tileEntity;
+                    return retrivalEntity = tileEntity;
         return retrivalEntity;
     }
 

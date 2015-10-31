@@ -7,6 +7,7 @@ public class Obstacle : MonoBehaviour
     private Vector2 currentCoords;
     [SerializeField]
     private GameObject currentTile;
+    public Tile _currentTile;
 
     // Use this for initialization
     void Start ()
@@ -20,6 +21,7 @@ public class Obstacle : MonoBehaviour
             if (_tile.TileCoord == currentCoords)
             {
                 currentTile = tile;
+                _currentTile = tile.GetComponent<Tile>();
                 _tile.TileEnitities.Add(gameObject);
                 break;
             }

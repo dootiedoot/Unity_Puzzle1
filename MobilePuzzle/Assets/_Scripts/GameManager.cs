@@ -5,7 +5,12 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField]
     GameObject[] players;
-    public static bool isPlayerTurn = true;
+    public static bool IsPlayerMoving;
+    public static bool IsPlayerTurn = true;
+    [SerializeField]
+    private bool isPlayerMoving;
+    [SerializeField]
+    private bool isPlayerTurn;
     public static int playerCount = 0;
     public static bool isEnemyTurn;
 
@@ -28,23 +33,12 @@ public class GameManager : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-
+        isPlayerMoving = IsPlayerMoving;
+        isPlayerTurn = IsPlayerTurn;
 	}
 
     void CheckTurn()
     {
-        foreach(GameObject player in players)
-        {
-            EntityMotor _entityMotor = player.GetComponent<EntityMotor>();
-            if (_entityMotor.IsMoving)
-            {
-                //Debug.Log("not ur turn!");
-                isPlayerTurn = false;
-                break;
-            }
-            else
-                isPlayerTurn = true;
-            
-        }
+
     }
 }

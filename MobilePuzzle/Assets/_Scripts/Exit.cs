@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Portal : MonoBehaviour
+public class Exit : MonoBehaviour
 {
+    // VARIABLES
+    // Tile
     [SerializeField]
     private Vector2 currentCoords;
     [SerializeField]
@@ -37,12 +39,6 @@ public class Portal : MonoBehaviour
                 break;
             }
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     void CheckSubject()

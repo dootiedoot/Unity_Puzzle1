@@ -1,20 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Controller : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GameObject selectedTile;
-
-    void Awake()
-    {
-       
-    }
-
-	// Use this for initialization
-	void Start ()
-    {
-	
-	}
 	
 	// Update is called once per frame
 	void Update ()
@@ -29,7 +18,7 @@ public class Controller : MonoBehaviour
                 if (hit.collider.CompareTag("Tile") && hit.collider.GetComponent<Tile>().TileEnitities.Count == 0)
                 {
                     ClearSelections();
-                    GameObject[] adjacentTiles = getAdjacentTiles(hit.collider.GetComponent<Tile>());
+                    GameObject[] adjacentTiles = hit.collider.GetComponent<Tile>().GetAdjacentTiles();
 
                     /*if (!selectedTile)  
                     {
@@ -45,28 +34,22 @@ public class Controller : MonoBehaviour
                         selectedTile = null;*/
 
                     showTileSelected(adjacentTiles);
-                    doEntityAction(adjacentTiles);
+                    if (!GameManager.IsPlayerMoving)
+                        doEntityAction(adjacentTiles);
                     selectedTile = null;
                 }
-                else if(hit.collider.CompareTag("Player"))
+                else if (hit.collider.CompareTag("Player"))
                 {
                     ClearSelections();
                     //hit.collider.GetComponent<EntityMotor>().ShowMoveTiles();
                     selectedTile = null;
                 }
+                else if (hit.collider.CompareTag("Destructor") && !GameManager.IsPlayerMoving)
+                {
+                    hit.collider.GetComponent<Destructor>().Detonate();
+                }
             }
         }
-    }
-
-    public GameObject[] getAdjacentTiles(Tile tile)
-    {
-        GameObject[] adjacentTiles = new GameObject[5];
-        adjacentTiles[0] = tile.TopTile;
-        adjacentTiles[1] = tile.RightTile;
-        adjacentTiles[2] = tile.BottomTile;
-        adjacentTiles[3] = tile.LeftTile;
-        adjacentTiles[4] = tile.gameObject;
-        return adjacentTiles;
     }
 
     void ClearSelections()
