@@ -177,7 +177,11 @@ public class EntityMotor : MonoBehaviour
         {
             isMoving = true;
             GameManager.IsPlayerMoving = true;
-            StartCoroutine(Move(transform, direction, GetMoveAmount(direction, currentTile), moveSpeed));
+            moveAmount = GetMoveAmount(direction, currentTile);
+            if (moveAmount == 0)
+                StartCoroutine(Nugde(transform, direction / 4));
+            else
+                StartCoroutine(Move(transform, direction, moveAmount, moveSpeed));
             moveAmount = 0;
         }
     }
@@ -206,7 +210,23 @@ public class EntityMotor : MonoBehaviour
         // Send an event after players have finished moving
         if (OnAction != null)
             OnAction();
+    }
 
+    IEnumerator Nugde(Transform source, Vector3 direction)
+    {
+        float timer = 0;
+        Vector3 newPosition = source.position + direction;
+        Vector3 oldPosition = source.position;
+        do
+        {
+            timer += Time.deltaTime;
+            source.position = Vector3.Lerp(oldPosition, newPosition, Mathf.PingPong(timer * 4, 1));
+            yield return null;
+        } while (timer < 0.5f);
+
+        source.position = oldPosition;
+        isMoving = false;
+        GameManager.IsPlayerMoving = false;
     }
 
     // Accessors and Mutators
