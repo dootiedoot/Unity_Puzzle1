@@ -82,14 +82,30 @@ public class PlayerController : MonoBehaviour
                 Tile _tile = adjacentTiles[i];
                 _tile.isSelected = false;
 
-                if (i == 0)
-                    _tile.EntityAction(Vector3.forward);
-                else if (i == 1)
-                    _tile.EntityAction(Vector3.right);
-                else if (i == 2)
-                    _tile.EntityAction(Vector3.back);
-                else if (i == 3)
-                    _tile.EntityAction(Vector3.left);
+                if(_tile.ContainsEntityTag(Tags.Player))
+                {
+                    EntityMotor _entityMotor = _tile.GetEntityByTag(Tags.Player).GetComponent<EntityMotor>();
+                    if (i == 0)
+                    {
+                        //_entityMotor.MoveAmount = 0;
+                        _entityMotor.Move(Vector3.forward);
+                    }
+                    else if (i == 1)
+                    {
+                        //_entityMotor.MoveAmount = 0;
+                        _entityMotor.Move(Vector3.right);
+                    }
+                    else if (i == 2)
+                    {
+                        //_entityMotor.MoveAmount = 0;
+                        _entityMotor.Move(Vector3.back);
+                    }
+                    else if (i == 3)
+                    {
+                        //_entityMotor.MoveAmount = 0;
+                        _entityMotor.Move(Vector3.left);
+                    }
+                }
             }
         }
     }

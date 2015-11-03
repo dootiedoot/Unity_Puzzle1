@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class EntityMotor : MonoBehaviour
@@ -15,7 +16,6 @@ public class EntityMotor : MonoBehaviour
     private Tile previousTile;
 
     // Moving Attributes
-    private float moveSpeed;
     [SerializeField] private int moveDistance;
     [SerializeField] private int moveAmount = 0;
     private Vector3 previousDirection;
@@ -112,7 +112,6 @@ public class EntityMotor : MonoBehaviour
                 GetMoveAmount(direction, _tile.LeftTile);
             }
         }
-        moveSpeed = moveAmount;
         return moveAmount;
     }
 
@@ -133,7 +132,7 @@ public class EntityMotor : MonoBehaviour
                 return isWalkable = false;
             }
             // if target ahead is a destructor & pusher is a player then move 1 unit
-            if (tile.ContainsEntityTag(Tags.Destructor) && CompareTag(Tags.Player))
+            else if (tile.ContainsEntityTag(Tags.Destructor) && CompareTag(Tags.Player))
             {
                 EntityMotor _entityMotor = tile.GetEntityByTag(Tags.Destructor).GetComponent<EntityMotor>();
                 if (_entityMotor.GetMoveAmount(previousDirection, tile) != 0)
@@ -177,11 +176,12 @@ public class EntityMotor : MonoBehaviour
         {
             isMoving = true;
             GameManager.IsPlayerMoving = true;
+            //moveAmount = 0;
             moveAmount = GetMoveAmount(direction, currentTile);
-            if (moveAmount == 0)
-                StartCoroutine(Nugde(transform, direction / 4));
+            if (moveAmount != 0)
+                StartCoroutine(Move(transform, direction, moveAmount, moveAmount));
             else
-                StartCoroutine(Move(transform, direction, moveAmount, moveSpeed));
+                StartCoroutine(Nugde(transform, direction / 4));
             moveAmount = 0;
         }
     }
@@ -217,12 +217,12 @@ public class EntityMotor : MonoBehaviour
         float timer = 0;
         Vector3 newPosition = source.position + direction;
         Vector3 oldPosition = source.position;
-        do
+        while (timer < 0.25f)
         {
             timer += Time.deltaTime;
-            source.position = Vector3.Lerp(oldPosition, newPosition, Mathf.PingPong(timer * 4, 1));
+            source.position = Vector3.Lerp(oldPosition, newPosition, Mathf.PingPong(timer * 6, 1));
             yield return null;
-        } while (timer < 0.5f);
+        }
 
         source.position = oldPosition;
         isMoving = false;
@@ -236,9 +236,14 @@ public class EntityMotor : MonoBehaviour
         set { currentTile = value; }
     }
 
-    public int GetMoveDistance
+    public int MoveDistance
     {
         get { return moveDistance; }
         set { moveDistance = value; }
+    }
+    public int MoveAmount
+    {
+        get { return moveAmount; }
+        set { moveAmount = value; }
     }
 }

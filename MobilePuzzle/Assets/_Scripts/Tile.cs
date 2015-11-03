@@ -48,18 +48,6 @@ public class Tile : MonoBehaviour
         return adjacentTiles;
     }
 
-    public void EntityAction(Vector3 direction)
-    {
-        if(TileEnitities.Count != 0)
-        {
-            foreach(GameObject tileEntity in TileEnitities)
-            {
-                if (tileEntity.CompareTag(Tags.Player))
-                    tileEntity.GetComponent<EntityMotor>().Move(direction);
-            }
-        }
-    }
-
     public bool ContainsEntityTag(string tag)
     {
         bool doesContain = false;
