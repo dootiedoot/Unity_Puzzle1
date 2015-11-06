@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
                         selectedTile = null;*/
 
                     showTileSelected(adjacentTiles);
-                    if (!GameManager.IsPlayerMoving)
+                    if (!GameManager.IsPlayerMoving && GameManager.IsPlayerTurn)
                         doEntityAction(adjacentTiles);
                     selectedTile = hit.collider.GetComponent<Tile>();
                 }
@@ -85,22 +85,22 @@ public class PlayerController : MonoBehaviour
                 if(_tile.ContainsEntityTag(Tags.Player))
                 {
                     EntityMotor _entityMotor = _tile.GetEntityByTag(Tags.Player).GetComponent<EntityMotor>();
-                    if (i == 0)
+                    if (i == 0) // if Toptile
                     {
                         //_entityMotor.MoveAmount = 0;
                         _entityMotor.Move(Vector3.forward);
                     }
-                    else if (i == 1)
+                    else if (i == 1) //if RightTile
                     {
                         //_entityMotor.MoveAmount = 0;
                         _entityMotor.Move(Vector3.right);
                     }
-                    else if (i == 2)
+                    else if (i == 2) //if BottomTile
                     {
                         //_entityMotor.MoveAmount = 0;
                         _entityMotor.Move(Vector3.back);
                     }
-                    else if (i == 3)
+                    else if (i == 3) //if LeftTile
                     {
                         //_entityMotor.MoveAmount = 0;
                         _entityMotor.Move(Vector3.left);

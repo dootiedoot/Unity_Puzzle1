@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobilePuzzle.CSharp", "MobilePuzzle.CSharp.csproj", "{C4D2EACB-1425-E552-94C7-D1DB6415E408}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobilePuzzle.CSharp.Editor", "MobilePuzzle.CSharp.Editor.csproj", "{22F4C70A-8FB8-DA67-4422-A47F4469F4DA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{C4D2EACB-1425-E552-94C7-D1DB6415E408}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4D2EACB-1425-E552-94C7-D1DB6415E408}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4D2EACB-1425-E552-94C7-D1DB6415E408}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22F4C70A-8FB8-DA67-4422-A47F4469F4DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22F4C70A-8FB8-DA67-4422-A47F4469F4DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22F4C70A-8FB8-DA67-4422-A47F4469F4DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22F4C70A-8FB8-DA67-4422-A47F4469F4DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

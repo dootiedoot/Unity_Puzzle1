@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EntityMotor : MonoBehaviour
 {
@@ -18,8 +19,11 @@ public class EntityMotor : MonoBehaviour
     // Moving Attributes
     [SerializeField] private int moveDistance;
     [SerializeField] private int moveAmount = 0;
+    [SerializeField] private float moveSpeedMultiplier = 1;
     private Vector3 previousDirection;
     private bool isMoving = false;
+    [SerializeField]
+    private List<EntityMotor> EntitiesToMove = new List<EntityMotor>();
 
     // Components
     private EntityType _EntityType;
@@ -124,10 +128,12 @@ public class EntityMotor : MonoBehaviour
             // if target ahead is an a interactive and pusher is a player then move 1 unit
             if (tile.ContainsEntityTag(Tags.Interactive) && CompareTag(Tags.Player))
             {
-                if (tile.GetEntityByTag(Tags.Interactive).GetComponent<EntityMotor>().GetMoveAmount(previousDirection, tile) != 0)
+                EntityMotor _entityMotor = tile.GetEntityByTag(Tags.Interactive).GetComponent<EntityMotor>();
+                if (_entityMotor.GetMoveAmount(previousDirection, tile) != 0)
                 {
-                    tile.GetEntityByTag(Tags.Interactive).GetComponent<EntityMotor>().Move(previousDirection);
-                    moveAmount++;
+                    //tile.GetEntityByTag(Tags.Interactive).GetComponent<EntityMotor>().Move(previousDirection);
+                    EntitiesToMove.Add(_entityMotor);
+                    //moveAmount++;
                 }
                 return isWalkable = false;
             }
@@ -137,8 +143,9 @@ public class EntityMotor : MonoBehaviour
                 EntityMotor _entityMotor = tile.GetEntityByTag(Tags.Destructor).GetComponent<EntityMotor>();
                 if (_entityMotor.GetMoveAmount(previousDirection, tile) != 0)
                 {
-                    _entityMotor.Move(previousDirection);
-                    moveAmount++;
+                    //_entityMotor.Move(previousDirection);
+                    EntitiesToMove.Add(_entityMotor);
+                    //moveAmount++;
                 }
                 return isWalkable = false;
             }
@@ -174,12 +181,9 @@ public class EntityMotor : MonoBehaviour
     {
         if (!isMoving)
         {
-            isMoving = true;
-            GameManager.IsPlayerMoving = true;
-            //moveAmount = 0;
             moveAmount = GetMoveAmount(direction, currentTile);
             if (moveAmount != 0)
-                StartCoroutine(Move(transform, direction, moveAmount, moveAmount));
+                StartCoroutine(Move(transform, direction, moveAmount, moveAmount * moveSpeedMultiplier));
             else
                 StartCoroutine(Nugde(transform, direction / 4));
             moveAmount = 0;
@@ -188,8 +192,10 @@ public class EntityMotor : MonoBehaviour
 
     IEnumerator Move(Transform source, Vector3 direction, int distance, float speed)
     {
+        isMoving = true;
+        GameManager.IsPlayerMoving = true;
         //transform.rotation = Quaternion.LookRotation(direction);      // To rotate object towards direction or not
-        if(animator)
+        if (animator)
             animator.SetBool("isMoving", true);
 
         Vector3 newPosition = source.position + direction * distance;
@@ -203,9 +209,12 @@ public class EntityMotor : MonoBehaviour
 
         if (animator)
             animator.SetBool("isMoving", false);
-        
+
+        PushEntities();
+
         isMoving = false;
         GameManager.IsPlayerMoving = false;
+
 
         // Send an event after players have finished moving
         if (OnAction != null)
@@ -214,6 +223,9 @@ public class EntityMotor : MonoBehaviour
 
     IEnumerator Nugde(Transform source, Vector3 direction)
     {
+        isMoving = true;
+        GameManager.IsPlayerMoving = true;
+
         float timer = 0;
         Vector3 newPosition = source.position + direction;
         Vector3 oldPosition = source.position;
@@ -223,10 +235,20 @@ public class EntityMotor : MonoBehaviour
             source.position = Vector3.Lerp(oldPosition, newPosition, Mathf.PingPong(timer * 6, 1));
             yield return null;
         }
-
         source.position = oldPosition;
+
+        PushEntities();
+
         isMoving = false;
         GameManager.IsPlayerMoving = false;
+    }
+
+    void PushEntities()
+    {
+        if (EntitiesToMove.Count != 0)
+            foreach (EntityMotor _entityMotor in EntitiesToMove)
+                _entityMotor.Move(previousDirection);
+        EntitiesToMove.Clear();
     }
 
     // Accessors and Mutators

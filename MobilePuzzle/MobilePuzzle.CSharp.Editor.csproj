@@ -15,7 +15,7 @@
     <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
     <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Editor:5</UnityProjectType>
-    <UnityBuildTarget>WebGL:20</UnityBuildTarget>
+    <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>5.2.2f1</UnityVersion>
     <RootNamespace></RootNamespace>
   </PropertyGroup>
@@ -26,7 +26,7 @@
     <IntermediateOutputPath>Temp\UnityVS_obj\Debug\</IntermediateOutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DefineConstants>DEBUG;TRACE;UNITY_5_2_2;UNITY_5_2;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_2D_PHYSICS;ENABLE_4_6_FEATURES;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_REFLECTION_BUFFERS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;RENDER_SOFTWARE_CURSOR;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;UNITY_WEBGL;UNITY_WEBGL_API;ENABLE_TEXTUREID_MAP;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_LOG_MIXED_STACKTRACE;ENABLE_IL2CPP;DEVELOPMENT_BUILD;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_2_2;UNITY_5_2;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_2D_PHYSICS;ENABLE_4_6_FEATURES;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_REFLECTION_BUFFERS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;UNITY_ANDROID;UNITY_ANDROID_API;ENABLE_SUBSTANCE;UNITY_ANDROID_API;ENABLE_TEXTUREID_MAP;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;ENABLE_MONO;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;CROSS_PLATFORM_INPUT;MOBILE_INPUT</DefineConstants>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -36,7 +36,7 @@
     <IntermediateOutputPath>Temp\UnityVS_obj\Release\</IntermediateOutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DefineConstants>TRACE;UNITY_5_2_2;UNITY_5_2;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_2D_PHYSICS;ENABLE_4_6_FEATURES;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_REFLECTION_BUFFERS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;RENDER_SOFTWARE_CURSOR;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;UNITY_WEBGL;UNITY_WEBGL_API;ENABLE_TEXTUREID_MAP;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_LOG_MIXED_STACKTRACE;ENABLE_IL2CPP;DEVELOPMENT_BUILD;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN</DefineConstants>
+    <DefineConstants>TRACE;UNITY_5_2_2;UNITY_5_2;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_2D_PHYSICS;ENABLE_4_6_FEATURES;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_REFLECTION_BUFFERS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;UNITY_ANDROID;UNITY_ANDROID_API;ENABLE_SUBSTANCE;UNITY_ANDROID_API;ENABLE_TEXTUREID_MAP;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;ENABLE_MONO;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;CROSS_PLATFORM_INPUT;MOBILE_INPUT</DefineConstants>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
@@ -119,9 +119,90 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\FurBall2D\Editor\CrossPlatformInput\CrossPlatformInputInitialize.cs" />
+    <Compile Include="Assets\Mad Level Manager\Examples\Editor\ExampleGenerator.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\IMadLevelGenerator.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Inspectors\MadAnimColorInspector.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Inspectors\MadAnimInspector.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Inspectors\MadAnimMoveInspector.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Inspectors\MadAnimRotateInspector.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Inspectors\MadAnimScaleInspector.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Inspectors\MadAnimatorInspector.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Inspectors\MadLevelAbstractLayoutInspector.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Inspectors\MadLevelAnimatorInspector.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Inspectors\MadLevelBackgroundInspector.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Inspectors\MadLevelBackgroundLayerInspector.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Inspectors\MadLevelFreeLayoutInspector.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Inspectors\MadLevelGridLayoutInspector.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Inspectors\MadLevelIconInspector.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Inspectors\MadLevelImageInspector.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Inspectors\MadLevelInputControlInspector.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Inspectors\MadLevelPropertyInspector.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Inspectors\MadLevelPropertyTextInspector.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Inspectors\MadLevelSettingsInspector.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\MadLevelConfigurationEditor.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\MadLevelUpdater.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\MadLevelWatcher.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Tools\IMadLevelConfigurationInspectorAddon.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Tools\MadLevelBackgroundTool.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Tools\MadLevelConfigurationInspector.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Tools\MadLevelExtensionEditor.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Tools\MadLevelFreeTool.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Tools\MadLevelGeneratorTool.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Tools\MadLevelGridBulletsTool.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Tools\MadLevelGridTool.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Tools\MadLevelGroupsEditTool.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Tools\MadLevelIconTool.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Tools\MadLevelInitTool.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Tools\MadLevelMenu.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Tools\MadLevelMoveAssetsTool.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Tools\MadLevelProfileBrowser.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Tools\MadLevelProfileTool.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Tools\MadLevelPropertyEmptyTool.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Tools\MadLevelPropertySpriteTool.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Tools\MadLevelPropertyTextTool.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\Tools\TextureAlphaMultiplier.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Editor\TrialInfo.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Mad2D\Editor\Inspectors\MadAnchorInspector.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Mad2D\Editor\Inspectors\MadAtlasInspector.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Mad2D\Editor\Inspectors\MadDragStopDraggableInspector.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Mad2D\Editor\Inspectors\MadFontInspector.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Mad2D\Editor\Inspectors\MadFreeDraggableInspector.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Mad2D\Editor\Inspectors\MadSpriteInspector.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Mad2D\Editor\Inspectors\MadTextInspector.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Mad2D\Editor\MadAtlasBrowser.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Mad2D\Editor\MadAtlasBuilder.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Mad2D\Editor\MadAtlasConverter.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Mad2D\Editor\MadAtlasUtil.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Mad2D\Editor\MadExternalTools.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Mad2D\Editor\MadFontBuilder.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Mad2D\Editor\MadInitTool.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\Mad2D\Editor\MadTexturePacker.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\MadCommons\Editor\MadAssets.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\MadCommons\Editor\MadEditorBase.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\MadCommons\Editor\MadGUI.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\MadCommons\Editor\MadInputDialog.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\MadCommons\Editor\MadPath.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\MadCommons\Editor\MadTrialEditor.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\MadCommons\Editor\MadUpdater.cs" />
+    <Compile Include="Assets\Mad Level Manager\Scripts\MadCommons\Editor\MadWWWFormSender.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Mad Level Manager\Examples\Example 5 - Unity 5\README.txt" />
+    <None Include="Assets\Mad Level Manager\Examples\Stuff\Fonts\Boogaloo New\SIL OFL Font License Boogaloo.txt" />
+    <None Include="Assets\Mad Level Manager\Examples\Stuff\Fonts\Boogaloo New\boogaloo.txt" />
+    <None Include="Assets\Mad Level Manager\Examples\Stuff\Fonts\Boogaloo\SIL OFL Font License Boogaloo.txt" />
+    <None Include="Assets\Mad Level Manager\README.TXT" />
+    <None Include="Assets\Mad Level Manager\Scripts\Mad2D\Resources\Shaders\Font DB.shader" />
+    <None Include="Assets\Mad Level Manager\Scripts\Mad2D\Resources\Shaders\Font White DB.shader" />
+    <None Include="Assets\Mad Level Manager\Scripts\Mad2D\Resources\Shaders\Font White.shader" />
+    <None Include="Assets\Mad Level Manager\Scripts\Mad2D\Resources\Shaders\Font.shader" />
+    <None Include="Assets\Mad Level Manager\Scripts\Mad2D\Resources\Shaders\UnlitTransparentTint DB.shader" />
+    <None Include="Assets\Mad Level Manager\Scripts\Mad2D\Resources\Shaders\UnlitTransparentTint.shader" />
+    <None Include="Assets\Mad Level Manager\Scripts\Mad2D\Resources\Shaders\UnlitTransparentTintPre DB.shader" />
+    <None Include="Assets\Mad Level Manager\Scripts\Mad2D\Resources\Shaders\UnlitTransparentTintPre.shader" />
+    <None Include="Assets\Mad Level Manager\Themes\Theme1\Fonts\font.txt" />
+    <None Include="Assets\Mad Level Manager\Themes\Theme2\Font\abeezee-glyphs.txt" />
+    <None Include="Assets\Mad Level Manager\Themes\Theme2\Font\abeezee-license.txt" />
     <None Include="Assets\Sci-Fi Music Pack\License.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
