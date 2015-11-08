@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobilePuzzle.CSharp.Plugins", "MobilePuzzle.CSharp.Plugins.csproj", "{268756F1-9992-23DC-EB54-D6FB18F89EC1}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobilePuzzle.CSharp", "MobilePuzzle.CSharp.csproj", "{C4D2EACB-1425-E552-94C7-D1DB6415E408}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobilePuzzle.CSharp.Editor", "MobilePuzzle.CSharp.Editor.csproj", "{22F4C70A-8FB8-DA67-4422-A47F4469F4DA}"
@@ -11,6 +13,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{268756F1-9992-23DC-EB54-D6FB18F89EC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{268756F1-9992-23DC-EB54-D6FB18F89EC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{268756F1-9992-23DC-EB54-D6FB18F89EC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{268756F1-9992-23DC-EB54-D6FB18F89EC1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C4D2EACB-1425-E552-94C7-D1DB6415E408}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C4D2EACB-1425-E552-94C7-D1DB6415E408}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4D2EACB-1425-E552-94C7-D1DB6415E408}.Release|Any CPU.ActiveCfg = Release|Any CPU
