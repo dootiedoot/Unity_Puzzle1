@@ -110,22 +110,6 @@
   <ItemGroup>
     <None Include="Assets\Game Jam Menu Template\Fonts\OpenSans\License!.txt" />
     <None Include="Assets\Game Jam Menu Template\GameJamTemplateReadMe.txt" />
-    <None Include="Assets\Mad Level Manager\Examples\Example 5 - Unity 5\README.txt" />
-    <None Include="Assets\Mad Level Manager\Examples\Stuff\Fonts\Boogaloo New\SIL OFL Font License Boogaloo.txt" />
-    <None Include="Assets\Mad Level Manager\Examples\Stuff\Fonts\Boogaloo New\boogaloo.txt" />
-    <None Include="Assets\Mad Level Manager\Examples\Stuff\Fonts\Boogaloo\SIL OFL Font License Boogaloo.txt" />
-    <None Include="Assets\Mad Level Manager\README.TXT" />
-    <None Include="Assets\Mad Level Manager\Scripts\Mad2D\Resources\Shaders\Font DB.shader" />
-    <None Include="Assets\Mad Level Manager\Scripts\Mad2D\Resources\Shaders\Font White DB.shader" />
-    <None Include="Assets\Mad Level Manager\Scripts\Mad2D\Resources\Shaders\Font White.shader" />
-    <None Include="Assets\Mad Level Manager\Scripts\Mad2D\Resources\Shaders\Font.shader" />
-    <None Include="Assets\Mad Level Manager\Scripts\Mad2D\Resources\Shaders\UnlitTransparentTint DB.shader" />
-    <None Include="Assets\Mad Level Manager\Scripts\Mad2D\Resources\Shaders\UnlitTransparentTint.shader" />
-    <None Include="Assets\Mad Level Manager\Scripts\Mad2D\Resources\Shaders\UnlitTransparentTintPre DB.shader" />
-    <None Include="Assets\Mad Level Manager\Scripts\Mad2D\Resources\Shaders\UnlitTransparentTintPre.shader" />
-    <None Include="Assets\Mad Level Manager\Themes\Theme1\Fonts\font.txt" />
-    <None Include="Assets\Mad Level Manager\Themes\Theme2\Font\abeezee-glyphs.txt" />
-    <None Include="Assets\Mad Level Manager\Themes\Theme2\Font\abeezee-license.txt" />
     <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\BlendModesOverlay.shader" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\BlurEffectConeTaps.shader" />

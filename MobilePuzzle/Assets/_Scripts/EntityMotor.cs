@@ -126,7 +126,7 @@ public class EntityMotor : MonoBehaviour
         if (tile.TileEnitities.Count != 0)
         {
             // if target ahead is an a interactive and pusher is a player then move 1 unit
-            if (tile.ContainsEntityTag(Tags.Interactive) && CompareTag(Tags.Player))
+            if (tile.ContainsEntityTag(Tags.Interactive))
             {
                 EntityMotor _entityMotor = tile.GetEntityByTag(Tags.Interactive).GetComponent<EntityMotor>();
                 if (_entityMotor.GetMoveAmount(previousDirection, tile) != 0)
@@ -138,7 +138,7 @@ public class EntityMotor : MonoBehaviour
                 return isWalkable = false;
             }
             // if target ahead is a destructor & pusher is a player then move 1 unit
-            else if (tile.ContainsEntityTag(Tags.Destructor) && CompareTag(Tags.Player))
+            else if (tile.ContainsEntityTag(Tags.Destructor))
             {
                 EntityMotor _entityMotor = tile.GetEntityByTag(Tags.Destructor).GetComponent<EntityMotor>();
                 if (_entityMotor.GetMoveAmount(previousDirection, tile) != 0)
@@ -214,7 +214,6 @@ public class EntityMotor : MonoBehaviour
 
         isMoving = false;
         GameManager.IsPlayerMoving = false;
-
 
         // Send an event after players have finished moving
         if (OnAction != null)
