@@ -84,13 +84,9 @@ public class PlayerController : MonoBehaviour
                 Tile _tile = adjacentTiles[i];
                 _tile.isSelected = false;
 
-                if(_tile.ContainsEntityTag(Tags.Interactive) || _tile.GetEntityByTag(Tags.Destructor))
+                if(_tile.ContainsEntityLayer(Layers.Pushable))
                 {
-                    EntityMotor _entityMotor = null;
-                    if (_tile.ContainsEntityTag(Tags.Interactive))
-                        _entityMotor = _tile.GetEntityByTag(Tags.Interactive).GetComponent<EntityMotor>();
-                    else if(_tile.ContainsEntityTag(Tags.Destructor))
-                        _entityMotor = _tile.GetEntityByTag(Tags.Destructor).GetComponent<EntityMotor>();
+                    EntityMotor _entityMotor = _tile.GetEntityByLayer(Layers.Pushable).GetComponent<EntityMotor>();
 
                     if (i == 0) // if Toptile
                     {

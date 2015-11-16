@@ -57,13 +57,31 @@ public class Tile : MonoBehaviour
                     return doesContain = true;
         return doesContain;
     }
-
     public GameObject GetEntityByTag(string tag)
     {
         GameObject retrivalEntity = null;
         if (TileEnitities.Count != 0)
             foreach (GameObject tileEntity in TileEnitities)
                 if (tileEntity.CompareTag(tag))
+                    return retrivalEntity = tileEntity;
+        return retrivalEntity;
+    }
+
+    public bool ContainsEntityLayer(int layer)
+    {
+        bool doesContain = false;
+        if (TileEnitities.Count != 0)
+            foreach (GameObject tileEntity in TileEnitities)
+                if (tileEntity != null && tileEntity.layer == layer)
+                    return doesContain = true;
+        return doesContain;
+    }
+    public GameObject GetEntityByLayer(int layer)
+    {
+        GameObject retrivalEntity = null;
+        if (TileEnitities.Count != 0)
+            foreach (GameObject tileEntity in TileEnitities)
+                if (tileEntity.layer == layer)
                     return retrivalEntity = tileEntity;
         return retrivalEntity;
     }

@@ -90,6 +90,7 @@
     <Compile Include="Assets\_Scripts\Exit.cs" />
     <Compile Include="Assets\_Scripts\GameManager.cs" />
     <Compile Include="Assets\_Scripts\Interactable.cs" />
+    <Compile Include="Assets\_Scripts\Layers.cs" />
     <Compile Include="Assets\_Scripts\MapGenerator.cs" />
     <Compile Include="Assets\_Scripts\Obstacle.cs" />
     <Compile Include="Assets\_Scripts\PlayerController.cs" />
