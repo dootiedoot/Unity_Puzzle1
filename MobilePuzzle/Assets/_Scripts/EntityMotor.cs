@@ -125,6 +125,7 @@ public class EntityMotor : MonoBehaviour
         bool isWalkable = true;
         if (tile.TileEnitities.Count != 0)
         {
+            /*
             // if target ahead is an a interactive and pusher is a player then move 1 unit
             if (tile.ContainsEntityTag(Tags.Interactive))
             {
@@ -149,8 +150,9 @@ public class EntityMotor : MonoBehaviour
                 }
                 return isWalkable = false;
             }
+            */
             // if target ahead is an a Lock & pusher is a interactive then do a lock type check and attempt to unlock
-            else if (tile.ContainsEntityTag(Tags.Interactable) && CompareTag(Tags.Interactive))
+            if (tile.ContainsEntityTag(Tags.Interactable) && CompareTag(Tags.Interactive))
             {
                 EntityInteractive _entityInteractive = GetComponent<EntityInteractive>();
                 Interactable _interactable = tile.GetEntityByTag(Tags.Interactable).GetComponent<Interactable>();
@@ -210,10 +212,10 @@ public class EntityMotor : MonoBehaviour
         if (animator)
             animator.SetBool("isMoving", false);
 
-        PushEntities();
-
         isMoving = false;
         GameManager.IsPlayerMoving = false;
+
+        PushEntities();
 
         // Send an event after players have finished moving
         if (OnAction != null)
@@ -236,10 +238,10 @@ public class EntityMotor : MonoBehaviour
         }
         source.position = oldPosition;
 
-        PushEntities();
-
         isMoving = false;
         GameManager.IsPlayerMoving = false;
+
+        PushEntities();
     }
 
     void PushEntities()

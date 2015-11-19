@@ -43,7 +43,7 @@ public class Exit : MonoBehaviour
     void CheckSubject()
     {
         //Debug.Log("Check!");
-        if (currentTile.TileEnitities.Count != 0 && currentTile.ContainsEntityTag(Tags.Player))
+        if (currentTile != null && currentTile.TileEnitities.Count != 0 && currentTile.ContainsEntityTag(Tags.Player))
         {
             GameObject entity = currentTile.GetEntityByTag(Tags.Player);
             if ((int)entity.GetComponent<EntityType>().myType == (int)acceptedType)
